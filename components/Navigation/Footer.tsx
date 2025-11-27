@@ -187,8 +187,8 @@ const Footer = () => {
           </div>
         </div> */}
         <div className="w-full text-white py-1 px-6">
-          <div className="flex justify-around font-light items-center lg:gap-25 flex-col lg:flex-row gap-2 text-[12px]  lg:text-[20px]">
-            <ul className="flex gap-4 opacity-80">
+          <div className="flex justify-around font-light items-center lg:gap-25 flex-col lg:flex-row gap-2 text-[7px] md:text-[15px] lg:text-[20px]">
+            <ul className="flex gap-2 lg:gap-4 opacity-80">
               <li>
                 <a href="#">LinkedIn</a>
               </li>
@@ -206,17 +206,17 @@ const Footer = () => {
             <h1 className="opacity-80 font-light text-[12px] lg:text-[20px]">© Copyrights The Internet Company</h1>
           </div>
 
-          <div className="flex justify-center">
+          <div className="flex flex-wrap justify-center">
             <span
-              className="font-normal leading-none lg:text-[160px] text-[40px] text-center tracking-tight"
+              className="font-normal leading-none lg:text-[160px] text-[28px] md:text-[80px] text-center tracking-tight"
             >
               TheInternetCompany
             </span>
           </div>
 
-          <div className="flex justify-center mt-1  text-[12px] lg:text-[22px]">
+          <div className="flex justify-center mt-1  text-[7px] lg:text-[22px]">
             <div className="lg:w-50"></div>
-            <ul className="flex font-light  gap-3 opacity-90">
+            <ul className="flex font-light gap-1 lg:gap-3 opacity-90">
               <li>
                 <a href="#">Home</a>
               </li>
