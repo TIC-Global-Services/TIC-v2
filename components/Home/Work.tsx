@@ -21,7 +21,7 @@ const Work = () => {
       title: "BCF\n Cast Factory",
       subtitle: "UIUX & Web",
       url: "https://bhumacastfactory.com/",
-      image: "/works-3.svg",
+      image: "/BCF_Impeller360_compressed.gif",
       name: "BCF Cast Factory",
     },
     {
@@ -194,13 +194,10 @@ const Work = () => {
                     <a href={item.url} className="pointer-events-auto">
                       <video
                         src={item.video}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
                         controls
-                        webkit-playsinline
-                        disablePictureInPicture
+                        autoPlay
+                        playsInline
+                        muted
                         controlsList="nodownload nofullscreen noplaybackrate noremoteplayback"
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-100 pointer-events-none"
                       />
