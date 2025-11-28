@@ -156,7 +156,7 @@ const Work = () => {
 
   const [scrollY, setScrollY] = useState(0);
   return (
-    <div className="mt-10 p-10">
+    <div className="mt-10 p-3 ">
       <div className="flex justify-between items-center">
         <div className="col-span-1">
           <p className=" font-normal text-5xl">Works</p>
@@ -171,13 +171,13 @@ const Work = () => {
           />
         </div>
       </div>
-      <div className="grid lg:grid-cols-2 sm:grid-cols-1 mt-10 gap-5 md:gap-10 lg:gap-5">
+      <div className="grid lg:grid-cols-2 sm:grid-cols-1 mt-10  gap-5 md:gap-10 lg:gap-5">
         {WorksList.map((item, idx) => {
           // const parallaxOffset = scrollY * 15;
           return (
             <div
               key={idx}
-              className={`relative group  overflow-hidden rounded-xl lg:rounded-3xl sm:rounded-3xl transition-all duration-500  min-h-[350px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[620px] ${
+              className={`relative group  overflow-hidden rounded-xl lg:rounded-3xl sm:rounded-3xl transition-all duration-500  min-h-[390px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[620px] ${
                 idx == 0 ||
                 idx == 3 ||
                 idx == 6 ||
@@ -193,7 +193,7 @@ const Work = () => {
               <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0">
                   {item.image ? (
-                    <a href={item.url} className="pointer-events-auto">
+                    <a href={item.url}>
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -203,7 +203,7 @@ const Work = () => {
                       />
                     </a>
                   ) : (
-                    <a href={item.url} className="pointer-events-auto">
+                    <a href={item.url} >
                       <video
                         src={item.video}
                         controls
