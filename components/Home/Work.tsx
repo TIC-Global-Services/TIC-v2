@@ -24,7 +24,7 @@ const Work = () => {
     {
       title: "Zaap\n Energy",
       subtitle: "Brand Identity, Web & App",
-      image: "/works-4.svg",
+      video: "/zapvideo.webm",
       name: "Zaap Energy",
     },
     {
@@ -60,7 +60,7 @@ const Work = () => {
     {
       title: "Hashmint\n India",
       subtitle: "3D Website & Photography",
-      image: "/works-10.png",
+      video: "/transistion.mp4",
       name: "Hashmint India",
     },
     {
@@ -72,7 +72,7 @@ const Work = () => {
     {
       title: "Future of Data",
       subtitle: "Web App Development",
-      image: "/works-11.svg",
+      video: "/Nv-studio.webm",
       name: "Future of Data",
     },
     {
@@ -102,7 +102,7 @@ const Work = () => {
     {
       title: "DSA\n Cancer\n Institute",
       subtitle: "Brand Identity & Web",
-      image: "/works-16.svg",
+      video: "/dsa_project.webm",
       name: "DSA Cancer Institute",
     },
     {
@@ -114,13 +114,13 @@ const Work = () => {
     {
       title: "Architecture",
       subtitle: "Brand Identity & Web",
-      image: "/works-3.svg",
+      video: "/hissn.webm",
       name: "Architecture",
     },
     {
       title: "Bulk Begins",
       subtitle: "Brand Identity, Web & App",
-      image: "/works-20.svg",
+      video: "/Bulkbeings.webm",
       name: "Bulk Begins",
     },
   ];
@@ -130,7 +130,7 @@ const Work = () => {
     <div className="mt-10 p-10">
       <div className="flex justify-between items-center">
         <div className="col-span-1">
-          <p className=" font-normal text-7xl">Works</p>
+          <p className=" font-normal text-5xl">Works</p>
         </div>
         <div>
           <Image
@@ -138,6 +138,7 @@ const Work = () => {
             width={83}
             height={87}
             alt="Down Arrow"
+            className="w-10 h-10 lg:w-15 lg:h-15"
           />
         </div>
       </div>
@@ -162,24 +163,28 @@ const Work = () => {
             >
               <div className="absolute inset-0 overflow-hidden">
                 <div className="absolute inset-0 ">
-                  <Image
-                    src={item.image}
-                    alt={item.name}
-                    width={1000}
-                    height={1000}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.name}
+                      width={1000}
+                      height={1000}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                  ) : (
+                    <video src={item.video} autoPlay muted loop controls playsInline  controlsList="nodownload nofullscreen noplaybackrate" className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-100" />
+                  )}
                 </div>
               </div>
               <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
                 <div>
-                  <p className="text-[43.5px] font-light text-white tracking-[-0.07em] max-w-[400px] whitespace-pre-line leading-[45px] sm:leading-[40px] md:leading-[50px]">
-  {item.title}
-</p>
+                  <p className="text-[32.45px]  lg:text-[43.5px] font-light text-white tracking-[-0.07em] max-w-[400px] whitespace-pre-line leading-[45px] sm:leading-[40px] md:leading-[50px]">
+                    {item.title}
+                  </p>
                 </div>
 
                 <div className="flex justify-start items-start">
-                  <h3 className="inline-flex items-start font-regular gap-2 px-5 sm:px-6 md:px-4 py-2 sm:py-2.5 md:py-3 bg-transparent  text-white  transition-all duration-300 tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
+                  <h3 className="inline-flex items-start font-regular gap-2 px-1 sm:px-6 md:px-4 py-1 sm:py-2.5 md:py-3 bg-transparent  text-white  transition-all duration-300 tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
                     {item.subtitle}
                   </h3>
                 </div>

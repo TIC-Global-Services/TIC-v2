@@ -47,12 +47,12 @@ const Faq = () => {
   return (
     <div>
       <div className="flex lg:justify-start justify-center lg:mx-10  mt-20">
-        <h1 className="lg:text-[80px] text-[35px]">Frequenty Asked Question</h1>
+        <h1 className="lg:text-[80px] text-[25px]">Frequenty Asked Question</h1>
       </div>
-      <div className="flex flex-col mx-auto lg:max-w-8xl sm:max-w-full p-15">
+      <div className="flex flex-col mx-auto lg:max-w-8xl sm:max-w-full p-8 lg:p-15">
         <div>
           {faqList.map((faq, index) => (
-            <div key={index} className="p-3">
+            <div key={index} className="p-1 lg:p-3">
               <Accordion title={faq.question} answer={faq.answer} />
               {index !== faqList.length-1 && (
                 <div className="w-full h-px bg-white mt-6"></div>
