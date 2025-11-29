@@ -27,7 +27,7 @@ const navItems = [
     link: "/",
   },
   { name: "Archive", link: "/archive" },
-  { name: "Abu Dhabi", link: "/" },
+  { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
 ];
 
 const FnavItems = [
@@ -47,7 +47,7 @@ const FnavItems = [
   },
   { name: "Archive", link: "/archive" },
   // { name: "Contact", link: "https://www.theinternetcompany.one/contact" },
-  { name: "Abu Dhabi", link: "/" },
+  { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
 ];
 const Navbar = () => {
   // References for DOM elements
