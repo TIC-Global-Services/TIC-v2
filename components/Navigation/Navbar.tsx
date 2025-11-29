@@ -65,14 +65,14 @@ const Navbar = () => {
 
   const pathname = usePathname();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [bgStyle, setBgStyle] = useState({ left: 0, width: 0, opacity: 0 });
+  const [bgStyle, setBgStyle] = useState({ left: 83, width: 125, opacity: 0 });
   const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const isWhiteBg =
     pathname === "/contact" || pathname === "/archive" || pathname === "/about";
 
-    const isClient= pathname === "/client"
+  const isClient = pathname === "/client";
 
   // Setup initial element states
   const setupInitialStates = useCallback(() => {
@@ -355,7 +355,7 @@ const Navbar = () => {
         ref={navbarRef}
         className="fixed top-0 left-0 right-0 z-40 bg-transparent"
       >
-        <Container className="flex items-center justify-between py-4 sm:py-6 lg:py-10">
+        <Container className="flex items-center justify-around gap-6 py-4 sm:py-6 lg:py-8">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/">
@@ -365,11 +365,15 @@ const Navbar = () => {
                 //     ? "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/tic%20(3)%201.png?updatedAt=1759839855964"
                 //     : "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/newLogo.png?updatedAt=1751867093209"
                 // }
-                src={ !isClient ? "/tic_logo.svg" :"/tic_logo_white.png"}
+                src={!isClient ? "/tic_logo.svg" : "/tic_logo_white.png"}
                 alt="The Internet Company Logo"
                 width={200}
                 height={100}
-                className={!isClient ? "h-15 sm:h-19 lg:h-20 w-auto" :"h-15 sm:h-19 lg:h-30 w-auto"}
+                className={
+                  !isClient
+                    ? "h-15 sm:h-19 lg:h-20 w-auto"
+                    : "h-15 sm:h-19 lg:h-30 w-auto"
+                }
                 priority
               />
             </Link>
@@ -391,15 +395,15 @@ const Navbar = () => {
               </Link>
             ))}
           </div> */}
-          <div className="relative hidden lg:flex flex-row items-center bg-white/20 backdrop-blur-md rounded-[20.52px] px-2 py-2">
+          <div className="relative hidden lg:flex flex-row justify-center items-center bg-white/20 backdrop-blur-md rounded-[20.52px] px-2 max-w-[643px] ">
             {/* Floating background that moves to hovered/active item */}
             <div
-              className={`absolute bg-black/90 rounded-2xl transition-all duration-300 ease-out `}
+              className="absolute bg-black/90 rounded-[15.32px]  transition-all duration-300 ease-out"
               style={{
                 left: `${bgStyle.left}px`,
                 width: `${bgStyle.width}px`,
-                height: "calc(100% - 16px)",
-                top: "8px",
+                height: "calc(100% - 12px)",
+                top: "7px",
                 opacity: bgStyle.opacity,
               }}
             />
@@ -417,10 +421,10 @@ const Navbar = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="px-4 py-2 text-center ">
+                <div className="text-center pt-[13px] pl-[16px] pb-[13px] pr-[16px]">
                   <span
                     className={`
-    text-[15.3px] md:text-[13.5px] font-normal whitespace-nowrap
+    text-[14.9px] md:text-[13.5px] font-normal whitespace-nowrap
     ${
       isWhiteBg
         ? hoveredIndex === index
@@ -440,7 +444,7 @@ const Navbar = () => {
           {/* CTA Button - Responsive sizing */}
           <Link
             href="/contact"
-            className="text-sm sm:text-base lg:text-[16px] p-(14px,20px,14px,20px) sm:px-4  rounded-[15.32] font-medium transition-all duration-300 shadow-lg bg-black text-white px-5 py-2  hover:bg-black/80"
+            className="text-sm sm:text-base lg:text-[16px] p-(14px,20px,14px,20px) sm:px-4  rounded-[12px] font-light transition-all duration-300 shadow-lg bg-black text-white px-5 py-2  hover:bg-black/80"
           >
             Let&apos;s talk
           </Link>

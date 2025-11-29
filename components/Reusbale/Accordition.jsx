@@ -44,7 +44,10 @@ const Accordition = ({ title, answer,serviceList,policy }) => {
             : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="overflow-hidden lg:text-2xl">{answer}</div>
+        <div className="overflow-hidden lg:text-2xl">
+          <h1>{answer}</h1>
+           
+          </div>
       </div>
     </div>
   )
