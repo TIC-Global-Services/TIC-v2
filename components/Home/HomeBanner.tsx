@@ -89,9 +89,9 @@ const HomeBanner = () => {
       );
     };
 
-    loadImages().then(()=>{
-       render();
-       // Canvas animation
+    images[0].onload = () => {
+      render();
+      // Canvas animation
       gsap.to(imgSeq, {
         frame: totalFrames - 1,
         snap: "frame",
@@ -102,20 +102,21 @@ const HomeBanner = () => {
           end: `+=${isMobile ? 1500 : 3500}`,
           scrub: 1,
           pin: true,
-          refreshPriority: 1, 
+          refreshPriority: 1,
           fastScrollEnd: true,
         },
         onUpdate: render,
-      }); 
-      ScrollTrigger.refresh()
+      });
+    };
+
+    ScrollTrigger.refresh();
     // return () => window.removeEventListener("resize", checkScreen);
-    })
 
     // ScrollTrigger.config({
     //   autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
     // });
-    // checkScreen();
-    // window.addEventListener("resize", checkScreen);
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
 
     return () => window.removeEventListener("resize", checkScreen);
   }, [isMobile]);
