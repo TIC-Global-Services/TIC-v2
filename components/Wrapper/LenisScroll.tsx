@@ -12,56 +12,68 @@ const LenisProvider = ({ children }: LenisProviderProps) => {
   const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
-    // register gsap plugin
     gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis({
-      // you can tweak these options
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      wheelMultiplier: 1,
-      // syncTouch is useful on devices where touch behaviour is laggy
-      syncTouch: false,
-      // autoRaf lets lenis run its own raf loop
-      autoRaf: true,
-    });
-    lenisRef.current = lenis;
+    /* ---------------------------------------------------
+       1. Allow browser native scroll restoration
+    --------------------------------------------------- */
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "auto"; // <-- important
+    }
 
-    // Setup GSAP ScrollTrigger to update on lenis scroll
-    lenis.on("scroll", (e) => {
-      ScrollTrigger.update();
-    });
+    /* ---------------------------------------------------
+       2. Initialize Lenis AFTER the browser restores scroll
+    --------------------------------------------------- */
+    requestAnimationFrame(() => {
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        wheelMultiplier: 1,
+        syncTouch: false,
+        autoRaf: false, // <-- changed (important!)
+      });
 
-    ScrollTrigger.scrollerProxy(document.body, {
-      scrollTop(value) {
-        if (arguments.length && value !== undefined) {
-          lenis.scrollTo(value);
-        }
-        return lenis.scroll;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-    });
+      lenisRef.current = lenis;
 
-    // If autoRaf is false, you need your own manual RAF loop. But when true:
-    // you can optionally sync lenis's raf with gsap's ticker:
-    gsap.ticker.add((time) => {
-      // lenis.raf expects milliseconds
-      lenis.raf(time * 1000);
-    });
+      lenis.on("scroll", () => ScrollTrigger.update());
 
-    // Cleanup on unmount
-    return () => {
-      if (lenisRef.current) {
-        lenisRef.current.destroy();
-        lenisRef.current = null;
+      /* ---------------------------------------------------
+         3. Proper GSAP scrollerProxy that doesn't override
+            browser's scroll on page load
+      --------------------------------------------------- */
+      ScrollTrigger.scrollerProxy(document.body, {
+        scrollTop(value) {
+          if (value !== undefined) {
+            // allow browser's native scroll restore FIRST
+            lenis.scrollTo(value, { immediate: true });
+          }
+          return window.scrollY;
+        },
+        getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          };
+        },
+      });
+
+      /* ---------------------------------------------------
+         4. Manual RAF so Lenis doesn't fight scroll restore
+      --------------------------------------------------- */
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
       }
+      requestAnimationFrame(raf);
+
+      ScrollTrigger.addEventListener("refresh", () => lenis.resize());
+      ScrollTrigger.refresh();
+    });
+
+    return () => {
+      lenisRef.current?.destroy();
       ScrollTrigger.killAll();
     };
   }, []);

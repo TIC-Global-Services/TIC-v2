@@ -22,29 +22,29 @@ const navItems = [
     name: "Client Portal",
     link: "/client",
   },
-  {
-    name: "Your Brand",
-    link: "/",
-  },
+  // {
+  //   name: "Your Brand",
+  //   link: "/",
+  // },
   { name: "Archive", link: "/archive" },
   { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
 ];
 
 const FnavItems = [
-  { name: "Home", link: "https://www.theinternetcompany.one" },
-  { name: "About", link: "https://www.theinternetcompany.one/about" },
+  { name: "Home", link: "/" },
+  { name: "About", link: "/about" },
   {
     name: "Design House",
     link: "/about",
   },
   {
     name: "Client Portal",
-    link: "https://www.theinternetcompany.one/client.html",
+    link: "/client",
   },
-  {
-    name: "Your Brand",
-    link: "/",
-  },
+  // {
+  //   name: "Your Brand",
+  //   link: "/",
+  // },
   { name: "Archive", link: "/archive" },
   // { name: "Contact", link: "https://www.theinternetcompany.one/contact" },
   { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
@@ -70,7 +70,7 @@ const Navbar = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const isWhiteBg =
-    pathname === "/contact" || pathname === "/archive" || pathname === "/about";
+    pathname === "/contact" || pathname === "/archive" || pathname === "/about" || pathname === "/";
 
   const isClient = pathname === "/client";
 
@@ -146,7 +146,7 @@ const Navbar = () => {
   const openMenu = useCallback(() => {
     if (!overlayRef.current || !plusIconRef.current) return;
 
-    gsap.set(overlayRef.current, { visibility: "visible" });
+    gsap.set(overlayRef.current, { visibility: "visible", opacity: 1 });
 
     // Animate plus icon to X
     gsap.to(plusIconRef.current, {
@@ -238,7 +238,7 @@ const Navbar = () => {
       delay: 0.1,
       ease: "power3.inOut",
       onComplete: () => {
-        gsap.set(overlayRef.current, { visibility: "hidden" });
+        gsap.set(overlayRef.current, { visibility: "hidden", opacity: 0 });
       },
     });
   }, [isHovering]);
@@ -354,7 +354,6 @@ const Navbar = () => {
       <nav
         ref={navbarRef}
         className="fixed top-0 left-0 right-0 z-40 bg-transparent"
-        
       >
         <Container className="flex items-center justify-between lg:p-10 py-4 sm:py-6 lg:py-8">
           {/* Logo */}
@@ -474,7 +473,7 @@ const Navbar = () => {
       {/* Full Screen Overlay Menu */}
       <div
         ref={overlayRef}
-        className="fixed inset-0 bg-black z-45"
+        className="fixed inset-0 bg-black z-45 opacity-0 invisible"
         role="dialog"
         aria-modal="true"
         aria-labelledby="menu-title"

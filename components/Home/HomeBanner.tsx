@@ -24,98 +24,108 @@ const HomeBanner = () => {
   const imgSeq = { frame: 0 };
 
   useEffect(() => {
-  const images: HTMLImageElement[] = []; // local cache for this render
-  const imgSeq = { frame: 0 };
+    const images: HTMLImageElement[] = []; // local cache for this render
+    const imgSeq = { frame: 0 };
 
-  const checkScreen = () => setIsMobile(window.innerWidth < 768);
-  checkScreen();
+    const checkScreen = () => setIsMobile(window.innerWidth < 768);
+    checkScreen();
 
-  window.addEventListener("resize", checkScreen);
+    window.addEventListener("resize", checkScreen);
 
-  const canvas = canvasRef.current;
-  if (!canvas) return;
-  const context = canvas.getContext("2d");
-  if (!context) return;
-  contextRef.current = context;
-
-  // Preload all images and cache
-  for (let i = 0; i < totalFrames; i++) {
-    const img = new Image();
-    img.src = currentFrame(i);
-    images.push(img);
-  }
-
-  // Return promise that resolves when all images are loaded once from cache or new
-  const loadImages = () =>
-    Promise.all(
-      images.map(
-        (img) =>
-          new Promise<void>((resolve) => {
-            if (img.complete) {
-              resolve();
-            } else {
-              img.onload = () => resolve();
-              img.onerror = () => resolve(); // handle load errors gracefully
-            }
-          })
-      )
-    );
-
-  const render = () => {
-    const img = images[imgSeq.frame];
-    if (!img || !img.complete) return;
-    const canvas = canvasRef.current;
-    const context = contextRef.current;
-    if (!canvas || !context) return;
-
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-    const imgWidth = img.naturalWidth || img.width;
-    const imgHeight = img.naturalHeight || img.height;
-    if (imgWidth === 0 || imgHeight === 0) return;
-
-    const scale = Math.max(canvasWidth / imgWidth, canvasHeight / imgHeight);
-    const x = canvasWidth / 2 - (imgWidth / 2) * scale;
-    const y = canvasHeight / 2 - (imgHeight / 2) * scale;
-
-    context.clearRect(0, 0, canvasWidth, canvasHeight);
-    context.drawImage(img, 0, 0, imgWidth, imgHeight, x, y, imgWidth * scale, imgHeight * scale);
-  };
-
-  const handleResize = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    contextRef.current = context;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    // Preload all images and cache
+    for (let i = 0; i < totalFrames; i++) {
+      const img = new Image();
+      img.src = currentFrame(i);
+      images.push(img);
+    }
 
-    render();
-  };
+    // Return promise that resolves when all images are loaded once from cache or new
+    const loadImages = () =>
+      Promise.all(
+        images.map(
+          (img) =>
+            new Promise<void>((resolve) => {
+              if (img.complete) {
+                resolve();
+              } else {
+                img.onload = () => resolve();
+                img.onerror = () => resolve(); // handle load errors gracefully
+              }
+            })
+        )
+      );
 
-  // Wait for all images to load, then setup canvas and animation
-  loadImages().then(() => {
-    handleResize();
-    render();
+    const render = () => {
+      const img = images[imgSeq.frame];
+      if (!img || !img.complete) return;
+      const canvas = canvasRef.current;
+      const context = contextRef.current;
+      if (!canvas || !context) return;
 
-    gsap.to(imgSeq, {
-      frame: totalFrames - 1,
-      snap: "frame",
-      ease: "none",
-      onUpdate: render,
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: `+=${isMobile ? 1500 : 3500}`,
-        scrub: 1,
-        pin: true,
-      },
+      const canvasWidth = canvas.width;
+      const canvasHeight = canvas.height;
+      const imgWidth = img.naturalWidth || img.width;
+      const imgHeight = img.naturalHeight || img.height;
+      if (imgWidth === 0 || imgHeight === 0) return;
+
+      const scale = Math.max(canvasWidth / imgWidth, canvasHeight / imgHeight);
+      const x = canvasWidth / 2 - (imgWidth / 2) * scale;
+      const y = canvasHeight / 2 - (imgHeight / 2) * scale;
+
+      context.clearRect(0, 0, canvasWidth, canvasHeight);
+      context.drawImage(
+        img,
+        0,
+        0,
+        imgWidth,
+        imgHeight,
+        x,
+        y,
+        imgWidth * scale,
+        imgHeight * scale
+      );
+    };
+
+    const handleResize = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      render();
+    };
+
+    // Wait for all images to load, then setup canvas and animation
+    loadImages().then(() => {
+      handleResize();
+      render();
+
+      gsap.to(imgSeq, {
+        frame: totalFrames - 1,
+        snap: "frame",
+        ease: "none",
+        onUpdate: render,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: `+=${isMobile ? 1500 : 3500}`,
+          scrub: 1,
+          pin: true,
+        },
+      });
+
+      ScrollTrigger.refresh();
     });
 
-    ScrollTrigger.refresh();
-  });
-
-  return () => window.removeEventListener("resize", checkScreen);
-}, [isMobile]);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, [isMobile]);
 
   return (
     <section
@@ -130,27 +140,24 @@ const HomeBanner = () => {
           className="absolute inset-0 w-full h-screen object-cover z-10"
         />
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-10 h-2/3 translate-y-1/3">
-          <p className=" text-[30px] md:text-[60px] lg:text-[75px] tracking-[-2.6px]  lg:tracking-[-3.6px] text-center font-[400] lg:font-normal leading-[40px] md:leading-[70px] lg:leading-[70px]  text-white mb-2">
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-10 h-2/3 translate-y-1/3 mix-blend-difference text-white">
+          <p className="text-[30px] md:text-[60px] lg:text-[75px] tracking-[-2.6px] lg:tracking-[-3.6px] text-center font-[400] lg:font-normal leading-[40px] md:leading-[70px] lg:leading-[70px] mb-2">
             A Web Branding House
           </p>
 
-          <div>
-            <p className="max-w-3xl text-white font-light lg:text-[18px] leading-[23.94px] text-center mb-3">
-              At The Internet Company, we craft immersive 3D CGI websites,
-              striking brand identities, and digital experiences that redefine
-              how audiences interact with brands online.
-            </p>
-          </div>
-          <div>
-            <Link
-              href="#"
-              className="bg-white text-black px-5 py-3 rounded-[15.32px] flex items-center "
-            >
-              Book a Call
-              <MoveRight style={{ clipPath: "inset(0px 0 0px 10px)" }} />
-            </Link>
-          </div>
+          <p className="max-w-3xl font-light lg:text-[18px] leading-[23.94px] text-center mb-3">
+            At The Internet Company, we craft immersive 3D CGI websites,
+            striking brand identities, and digital experiences that redefine how
+            audiences interact with brands online.
+          </p>
+
+          <Link
+            href="#"
+            className="bg-white text-black px-5 py-3 rounded-[15.32px] flex items-center"
+          >
+            Book a Call
+            <MoveRight style={{ clipPath: "inset(0px 0 0px 10px)" }} />
+          </Link>
         </div>
 
         {/* Keep Scrolling Text */}
