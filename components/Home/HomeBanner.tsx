@@ -16,9 +16,7 @@ const HomeBanner = () => {
   const totalFrames = 150;
   // const isMobile = window.innerWidth < 768;
   const currentFrame = (index: number) =>
-    isMobile
-      ? `/door-mobile/${(index + 1).toString().padStart(5, "0")}.webp`
-      : `/door/${(index + 1).toString().padStart(5, "0")}.avif`;
+   `/door/${(index + 1).toString().padStart(5, "0")}.avif`;
 
   const images: HTMLImageElement[] = [];
   const imgSeq = { frame: 0 };
@@ -125,7 +123,7 @@ const HomeBanner = () => {
     });
 
     return () => window.removeEventListener("resize", checkScreen);
-  }, [isMobile]);
+  }, []);
 
   return (
     <section
