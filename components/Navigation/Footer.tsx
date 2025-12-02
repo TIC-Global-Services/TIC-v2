@@ -188,35 +188,8 @@ const Footer = () => {
         </div> */}
         <div className="w-full text-white py-1 px-6">
           <div className="flex justify-around font-light items-center lg:gap-25 flex-col lg:flex-row gap-2 text-[7px] md:text-[15px] lg:text-[16px]">
-            <ul className="flex gap-2 lg:gap-4 opacity-80">
-              <li>
-                <a href="#">LinkedIn</a>
-              </li>
-              <li>
-                <a href="#">Instagram</a>
-              </li>
-              <li>
-                <a href="#">Privacy Policy</a>
-              </li>
-              <li>
-                <a href="#">Terms & Conditions</a>
-              </li>
-            </ul>
-
-            <h1 className="opacity-80 font-light text-[12px] lg:text-[16px]">© Copyrights The Internet Company</h1>
-          </div>
-
-          <div className="flex flex-wrap justify-center">
-            <span
-              className="font-light leading-none lg:text-[165px] text-[28px] md:text-[80px] text-center tracking-tight"
-            >
-              TheInternetCompany
-            </span>
-          </div>
-
-          <div className="flex justify-center text-[7px] lg:text-[16px]">
-            <div className="lg:w-65"></div>
-            <ul className="flex font-light gap-1 lg:gap-3 opacity-90">
+          
+           <ul className="flex font-light gap-1 lg:gap-3 opacity-90">
               <li>
                 <a href="#">Home</a>
               </li>
@@ -234,6 +207,34 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#">Contact Us</a>
+              </li>
+            </ul>
+            <h1 className="opacity-80 font-light text-[12px] lg:text-[16px]">© Copyrights The Internet Company</h1>
+          </div>
+
+          <div className="flex flex-wrap justify-center">
+            <span
+              className="font-light leading-none lg:text-[165px] text-[28px] md:text-[80px] text-center tracking-tight"
+            >
+              TheInternetCompany
+            </span>
+          </div>
+
+          <div className="flex justify-center text-[7px] lg:text-[16px]">
+            <div className="lg:w-75"></div>
+           
+              <ul className="flex gap-2 lg:gap-4 opacity-80">
+              <li>
+                <a href="#">LinkedIn</a>
+              </li>
+              <li>
+                <a href="#">Instagram</a>
+              </li>
+              <li>
+                <a href="#">Privacy Policy</a>
+              </li>
+              <li>
+                <a href="#">Terms & Conditions</a>
               </li>
             </ul>
           </div>
