@@ -208,7 +208,7 @@ const Footer = () => {
 
           <div className="flex flex-wrap justify-center">
             <span
-              className="font-light leading-none lg:text-[160px] text-[28px] md:text-[80px] text-center tracking-tight"
+              className="font-light leading-none lg:text-[165px] text-[28px] md:text-[80px] text-center tracking-tight"
             >
               TheInternetCompany
             </span>

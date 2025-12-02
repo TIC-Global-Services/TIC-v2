@@ -102,14 +102,14 @@ const HomeBanner = () => {
           end: `+=${isMobile ? 1500 : 3500}`,
           scrub: 1,
           pin: true,
-          refreshPriority: 1,
-          fastScrollEnd: true,
         },
         onUpdate: render,
       });
     };
 
-    ScrollTrigger.refresh();
+     setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 200);
     // return () => window.removeEventListener("resize", checkScreen);
 
     // ScrollTrigger.config({

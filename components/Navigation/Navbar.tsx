@@ -354,6 +354,7 @@ const Navbar = () => {
       <nav
         ref={navbarRef}
         className="fixed top-0 left-0 right-0 z-40 bg-transparent"
+        
       >
         <Container className="flex items-center justify-between lg:p-10 py-4 sm:py-6 lg:py-8">
           {/* Logo */}
