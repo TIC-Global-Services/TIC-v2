@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 const Work = () => {
-   useEffect(() => {
+  useEffect(() => {
     const videos = document.querySelectorAll("video");
     videos.forEach((video) => {
       video.load();
@@ -159,7 +160,9 @@ const Work = () => {
     <div className="p-3 lg:p-10">
       <div className="flex justify-between items-center">
         <div className="col-span-1">
-          <p className=" font-normal text-[50px] lg:text-[80px] tracking-[-3.91px] lg:tracking-[-4.91px]">Works</p>
+          <p className=" font-normal text-[50px] lg:text-[80px] tracking-[-3.91px] lg:tracking-[-4.91px]">
+            Works
+          </p>
         </div>
         <div>
           <Image
@@ -175,6 +178,7 @@ const Work = () => {
         {WorksList.map((item, idx) => {
           // const parallaxOffset = scrollY * 15;
           return (
+            
             <div
               key={idx}
               className={`relative group  overflow-hidden rounded-xl lg:rounded-3xl sm:rounded-3xl transition-all duration-500  min-h-[390px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[620px] ${
@@ -186,24 +190,25 @@ const Work = () => {
                 idx == 15 ||
                 idx == 16 ||
                 idx == 19
-                  ? "lg:col-span-2 sm:col-span-1": idx==2 ?"bg-[#141414]"
+                  ? "lg:col-span-2 sm:col-span-1"
+                  : idx == 2
+                  ? "bg-[#141414]"
                   : " "
               }  `}
             >
-              <div className="absolute inset-0 overflow-hidden">
+              <Link href={item.url ? item.url : "/"}>
+              <div className="absolute inset-0 overflow-hidden pointer-events-auto">
                 <div className="absolute inset-0">
-                  {item.image ? (
-                    <a href={item.url}>
+                  
+                    {item.image ? (
                       <Image
                         src={item.image}
                         alt={item.name}
                         width={1000}
                         height={1000}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 pointer-events-none"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 "
                       />
-                    </a>
-                  ) : (
-                    <a href={item.url} >
+                    ) : (
                       <video
                         src={item.video}
                         controls
@@ -212,10 +217,10 @@ const Work = () => {
                         muted
                         loop
                         preload="auto"
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-100 pointer-events-none"
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-100"
                       />
-                    </a>
-                  )}
+                    )}
+                  
                 </div>
               </div>
               <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
@@ -231,6 +236,7 @@ const Work = () => {
                   </h3>
                 </div>
               </div>
+                </Link>
             </div>
           );
         })}

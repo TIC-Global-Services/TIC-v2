@@ -443,7 +443,7 @@ const Navbar = () => {
 
           {/* CTA Button - Responsive sizing */}
           <Link
-            href="/contact"
+            href="/client "
             className="text-sm sm:text-base lg:text-[16px] p-(14px,20px,14px,20px) sm:px-4  rounded-[12px] font-light transition-all duration-300 shadow-lg bg-black text-white px-5 py-2  hover:bg-black/80"
           >
             Let&apos;s talk
