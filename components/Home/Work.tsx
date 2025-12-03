@@ -143,14 +143,14 @@ const Work = () => {
       title: "Architecture",
       subtitle: "Brand Identity & Web",
       video: "/hissn.webm",
-      url: "https://tic-hissin-3vwm.vercel.app/",
+      //  url: "https://tic-hissin-3vwm.vercel.app/",
       name: "Architecture",
     },
     {
       title: "Bulk Begins",
       subtitle: "Brand Identity, Web & App",
       video: "/Bulkbeings.webm",
-      url: "https://tic-global-bulkbeings.vercel.app/",
+      // url: "https://tic-global-bulkbeings.vercel.app/",
       name: "Bulk Begins",
     },
   ];
