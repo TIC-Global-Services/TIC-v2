@@ -4,6 +4,7 @@ import { IoLogoLinkedin } from "react-icons/io5";
 import { FaInstagram } from "react-icons/fa";
 import Image from "next/image";
 import { RiArrowRightLine } from "react-icons/ri";
+import { usePathname } from "next/navigation";
 
 const socialLinks = [
   {
@@ -27,10 +28,23 @@ const content = [
     button: "Go to Insta",
   },
 ];
-
+const contactcontent = [
+  {
+    name: "Check out our latest work on instagram",
+    button: "TIC.Global",
+    color: "#4B4845",
+  },
+  {
+    name: "Join our team Send us your portfolio together with a brief introduction and we will get back to you as soon as possible.",
+    button: "admin@theinternetcompany.one",
+    color: "#FFFFFF",
+  },
+];
 const Footer = () => {
   const [scrollY, setScrollY] = useState(0);
   const footerRef = useRef<HTMLElement | null>(null);
+  const pathname = usePathname();
+  const isWhiteBg = pathname === "/contact";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,63 +67,112 @@ const Footer = () => {
   return (
     <footer
       ref={footerRef}
-      className="min-h-screen w-full bg-black text-white overflow-hidden"
+      className={`min-h-screen w-full ${
+        isWhiteBg ? "bg-[#F5F5F5] text-black " : "bg-black text-white "
+      } overflow-hidden`}
     >
       <div className="container mx-auto px-4 sm:px-6 md:px-7 py-8 md:py-15 h-full flex flex-col justify-between">
         {/* Main Content Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4 sm:gap-4 mb-8 md:mb-16 flex-1 pt-12 sm:pt-16 md:pt-20">
-          {content.map((item, index) => {
-            const parallaxOffset = scrollY * 15;
+        {!isWhiteBg ? (
+          <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4 sm:gap-4 mb-8 md:mb-16 flex-1 pt-12 sm:pt-16 md:pt-20">
+            {content.map((item, index) => {
+              const parallaxOffset = scrollY * 15;
 
-            return (
-              <div
-                key={index}
-                className="relative overflow-hidden rounded-xl sm:rounded-xl transition-all duration-500 hover:shadow-2xl min-h-[400px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[640px] "
-              >
-                {/* Image Section with Parallax */}
-                <div className="absolute inset-0 overflow-hidden">
-                  <div
-                    className="absolute inset-0 w-full h-full"
-                    style={{
-                      transform: `translateY(${parallaxOffset}%) scale(1.1)`,
-                      transition: "transform 0.1s ease-out",
-                      top: "-10%",
-                    }}
-                  >
-                    <Image
-                      src={item.img}
-                      alt={item.name}
-                      width={1000}
-                      height={1000}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                  </div>
-                </div>
-
-                {/* Content Overlay */}
-                <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
-                  {/* Title at Top */}
-                  <div>
-                    <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl max-w-full sm:max-w-[400px] md:max-w-[470px] leading-tight sm:leading-[40px] md:leading-[50px] tracking-[-0.07em] font-normal text-white">
-                      {item.name}
-                    </h3>
-                  </div>
-
-                  {/* Button at Bottom */}
-                  <div className="flex justify-start">
-                    <a
-                      href={item.link}
-                      className="inline-flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-transparent border border-white text-white font-normal rounded-full transition-all duration-300 hover:bg-white hover:text-black tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]"
+              return (
+                <div
+                  key={index}
+                  className="relative overflow-hidden rounded-xl sm:rounded-xl transition-all duration-500 hover:shadow-2xl h-[818px] w-[100%]"
+                >
+                  {/* Image Section with Parallax */}
+                  <div className="absolute inset-0 overflow-hidden">
+                    <div
+                      className="absolute inset-0 w-full h-full"
+                      style={{
+                        transform: `translateY(${parallaxOffset}%) scale(1.1)`,
+                        transition: "transform 0.1s ease-out",
+                        top: "-10%",
+                      }}
                     >
-                      {item.button}
-                      <RiArrowRightLine className="text-lg sm:text-xl md:text-2xl" />
-                    </a>
+                      <Image
+                        src={item.img}
+                        alt={item.name}
+                        width={1000}
+                        height={1000}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Content Overlay */}
+                  <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
+                    {/* Title at Top */}
+                    <div>
+                      <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl max-w-full sm:max-w-[400px] md:max-w-[470px] leading-tight sm:leading-[40px] md:leading-[50px] tracking-[-0.07em] font-normal text-white">
+                        {item.name}
+                      </h3>
+                    </div>
+
+                    {/* Button at Bottom */}
+                    <div className="flex justify-start">
+                      <a
+                        href={item.link}
+                        className="inline-flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-transparent border border-white text-white font-normal rounded-full transition-all duration-300 hover:bg-white hover:text-black tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]"
+                      >
+                        {item.button}
+                        <RiArrowRightLine className="text-lg sm:text-xl md:text-2xl" />
+                      </a>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="w-full">
+            <div className="grid grid-cols-2 gap-3 mb-3 w-full">
+              {contactcontent.map((item, index) => {
+                const parallaxOffset = scrollY * 15;
+                return (
+                  <div
+                    key={index}
+                    style={{ backgroundColor: item.color }}
+                    className="rounded-2xl  w-full 
+          h-[450px] 
+          sm:h-[500px] 
+          md:h-[550px] 
+          lg:h-[600px] 
+          xl:h-[650px] 
+          2xl:h-[650px] overflow-hidden"
+                  >
+                    {/* Content Overlay */}
+                    <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
+                      {/* Title at Top */}
+                      <div>
+                        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl max-w-full sm:max-w-[400px] md:max-w-[470px] leading-tight sm:leading-[40px] md:leading-[50px] tracking-[-0.07em] font-normal text-black">
+                          {item.name}
+                        </h3>
+                      </div>
+
+                      {/* Button at Bottom */}
+                      <div className="flex justify-start">
+                        <a
+                          // href={item.link}
+                          className={`inline-flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-transparent border ${
+                            index == 0
+                              ? "border-white text-white"
+                              : "border-black text-black"
+                          } font-normal rounded-full transition-all duration-300 hover:bg-white hover:text-black tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]`}
+                        >
+                          {item.button}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* <div className="flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-6 md:gap-8 pb-4 sm:pb-6 md:pb-0"> */}
         {/* Social Links */}
@@ -186,10 +249,13 @@ const Footer = () => {
             </ul>
           </div>
         </div> */}
-        <div className="w-full text-white py-1 px-6">
+        <div
+          className={`w-full ${
+            isWhiteBg ? " text-black bg-[#F5F5F5]" : "text-white bg-black"
+          } py-1 px-6`}
+        >
           <div className="flex justify-around font-light items-center lg:gap-25 flex-col lg:flex-row gap-2 text-[7px] md:text-[15px] lg:text-[16px]">
-          
-           <ul className="flex font-light gap-1 lg:gap-3 opacity-90">
+            <ul className="flex font-light gap-1 lg:gap-3 opacity-90">
               <li>
                 <a href="#">Home</a>
               </li>
@@ -209,26 +275,30 @@ const Footer = () => {
                 <a href="#">Contact Us</a>
               </li> */}
             </ul>
-            <h1 className="opacity-80 font-light text-[12px] lg:text-[16px]">© Copyrights The Internet Company</h1>
+            <h1 className="opacity-80 font-light text-[12px] lg:text-[16px]">
+              © Copyrights The Internet Company
+            </h1>
           </div>
 
           <div className="flex flex-wrap justify-center">
-            <span
-              className="font-light leading-none lg:text-[165px] text-[28px] md:text-[80px] text-center tracking-tight"
-            >
+            <span className="font-light leading-none lg:text-[165px] text-[28px] md:text-[80px] text-center tracking-tight">
               TheInternetCompany
             </span>
           </div>
 
           <div className="flex justify-center text-[7px] lg:text-[16px]">
             <div className="lg:w-75"></div>
-           
-              <ul className="flex gap-2 lg:gap-4 opacity-80">
+
+            <ul className="flex gap-2 lg:gap-4 opacity-80">
               <li>
-                <a href="https://www.linkedin.com/company/tic-global-services/">LinkedIn</a>
+                <a href="https://www.linkedin.com/company/tic-global-services/">
+                  LinkedIn
+                </a>
               </li>
               <li>
-                <a href="https://www.instagram.com/the.internetcompany">Instagram</a>
+                <a href="https://www.instagram.com/the.internetcompany">
+                  Instagram
+                </a>
               </li>
               <li>
                 <a href="#">Privacy Policy</a>

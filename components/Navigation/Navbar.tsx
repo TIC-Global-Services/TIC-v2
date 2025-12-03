@@ -443,7 +443,7 @@ const Navbar = () => {
 
           {/* CTA Button - Responsive sizing */}
           <Link
-            href="/client "
+            href="/contact"
             className="text-sm sm:text-base lg:text-[16px] p-(14px,20px,14px,20px) sm:px-4  rounded-[12px] font-light transition-all duration-300 shadow-lg bg-black text-white px-5 py-2  hover:bg-black/80"
           >
             Let&apos;s talk
@@ -535,8 +535,8 @@ const Navbar = () => {
             {/* Social Links */}
             <div ref={socialLinksRef} className="flex flex-col items-start">
               {[
-                { href: "https://instagram.com", label: "Instagram" },
-                { href: "https://linkedin.com", label: "LinkedIn" },
+                { href: "https://www.instagram.com/the.internetcompany", label: "Instagram" },
+                { href: "https://www.linkedin.com/company/tic-global-services/", label: "LinkedIn" },
               ].map(({ href, label }) => (
                 <a
                   key={label}
@@ -582,12 +582,14 @@ const Navbar = () => {
 
           {/* Contact Button - Bottom Left */}
           <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8">
+            <Link href={'/contact'}>
             <button
               onClick={handleLinkClick}
               className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition-all text-sm sm:text-base"
             >
               contact
             </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ interface InfoCardProps {
   items: InfoItem[];
 }
 
-const InfoCard: React.FC<InfoCardProps> = ({ title, items }) => {
+const   InfoCard: React.FC<InfoCardProps> = ({ title, items }) => {
   return (
     <div className="flex flex-col ">
       <h2 className="text-black text-lg">{title}</h2>
