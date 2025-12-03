@@ -1,8 +1,8 @@
 "use client";
 import React, { useState } from "react";
 
-const Accordition = ({ title, answer,serviceList,policy }) => {
-     const [accordionOpen, setAccordionOpen] = useState(false);
+const Accordition = ({ title, answer, serviceList, policy }) => {
+    const [accordionOpen, setAccordionOpen] = useState(false);
   return (
      <div className="py-2">
       <button
@@ -44,9 +44,24 @@ const Accordition = ({ title, answer,serviceList,policy }) => {
             : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="overflow-hidden lg:text-2xl">
+        <div className="overflow-hidden lg:text-xl py-2">
           <h1>{answer}</h1>
-           
+          {serviceList?.length > 0 && (
+            <ul className="list-disc pl-6 space-y-3">
+              {serviceList.map((item, i) => (
+                <li key={i}>
+                  <strong>{item.title}</strong> {item.subtitle}
+                </li>
+              ))}
+            </ul>
+          )}
+          {policy?.length > 0 && (
+            <ul className="list-disc pl-6 space-y-2">
+              {policy.map((p, i) => (
+                <li key={i}>{p.policy}</li>
+              ))}
+            </ul>
+          )}
           </div>
       </div>
     </div>
