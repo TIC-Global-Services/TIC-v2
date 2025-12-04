@@ -39,7 +39,7 @@ const Contacts = () => {
                       </h2> 
                       <a
                         href={`mailto:${item.email}`}
-                        className="inline-flex w-fit mt-2 px-2 lg:px-6 py-1 lg:py-3 border border-black rounded-full text-[10px] md:text-[20px] lg:text-[25.1px] tracking-tight hover:bg-black hover:text-white transition text-black "
+                        className="inline-flex w-fit mt-2 px-2 lg:px-6 py-1 lg:py-3 border border-black rounded-full text-[15px] md:text-[20px] lg:text-[25.1px] tracking-tight hover:bg-black hover:text-white transition text-black "
                       >
                         {item.email}
                       </a>

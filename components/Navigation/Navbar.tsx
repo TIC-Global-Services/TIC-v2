@@ -27,6 +27,7 @@ const navItems = [
   //   link: "/",
   // },
   { name: "Archive", link: "/archive" },
+  {name:"Contact",link:"/contact"},
   { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
 ];
 
@@ -46,6 +47,7 @@ const FnavItems = [
   //   link: "/",
   // },
   { name: "Archive", link: "/archive" },
+  {name:"Contact",link:"/contact"}, 
   // { name: "Contact", link: "https://www.theinternetcompany.one/contact" },
   { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
 ];
@@ -425,7 +427,7 @@ const Navbar = () => {
                   <span
                     className={`
     text-[14.9px] md:text-[13.5px] font-normal whitespace-nowrap
-    ${
+    ${isWhiteBg !=undefined &&
       isWhiteBg
         ? hoveredIndex === index
           ? "text-white"
