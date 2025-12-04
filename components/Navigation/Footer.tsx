@@ -69,9 +69,9 @@ const Footer = () => {
       ref={footerRef}
       className={`min-h-screen w-full ${
         isWhiteBg ? "bg-[#F5F5F5] text-black " : "bg-black text-white "
-      } overflow-hidden`}
+      } overflow-hidden flex items-center`}
     >
-      <div className="container mx-auto px-4 sm:px-6 md:px-7 py-8 md:py-15 h-full flex flex-col justify-between">
+      <div className="w-screen px-8 py-8 md:py-15 min-h-screen flex flex-col justify-between">
         {/* Main Content Section */}
         {!isWhiteBg ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4 sm:gap-4 mb-8 md:mb-16 flex-1 pt-12 sm:pt-16 md:pt-20">
@@ -81,7 +81,7 @@ const Footer = () => {
               return (
                 <div
                   key={index}
-                  className="relative overflow-hidden rounded-xl sm:rounded-xl transition-all duration-500 hover:shadow-2xl h-[818px] w-[100%]"
+                  className="relative overflow-hidden rounded-xl sm:rounded-xl transition-all duration-500 hover:shadow-2xl h-[650px] w-full"
                 >
                   {/* Image Section with Parallax */}
                   <div className="absolute inset-0 overflow-hidden">
@@ -129,20 +129,15 @@ const Footer = () => {
           </div>
         ) : (
           <div className="w-full">
-            <div className="grid grid-cols-2 gap-3 mb-3 w-full">
+            <div className="w-full">
+              <div className="grid grid-cols-2 gap-5 mb-10">
               {contactcontent.map((item, index) => {
                 const parallaxOffset = scrollY * 15;
                 return (
                   <div
                     key={index}
                     style={{ backgroundColor: item.color }}
-                    className="rounded-2xl  w-full 
-          h-[450px] 
-          sm:h-[500px] 
-          md:h-[550px] 
-          lg:h-[600px] 
-          xl:h-[650px] 
-          2xl:h-[650px] overflow-hidden"
+                    className="rounded-2xl h-[75vh] md:h-[80vh] lg:h-[75vh]  overflow-hidden "
                   >
                     {/* Content Overlay */}
                     <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
@@ -171,6 +166,8 @@ const Footer = () => {
                 );
               })}
             </div>
+            </div>
+            
           </div>
         )}
 
