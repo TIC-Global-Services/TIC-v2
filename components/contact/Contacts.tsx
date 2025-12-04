@@ -27,18 +27,16 @@ const Contacts = () => {
               <div className="space-y-10">
                 {contacpersonList.map((item, index) => (
                   <div key={index} className="pb-5 border-b border-black/50">
-                    <div className="grid grid-cols-3 items-center text-start">
-                      {/* COL 1 - DESIGNATION */}
-                      <h2 className="text-[32px] md:text-[38px] lg:text-[44px] font-normal whitespace-pre-line text-black ">
+                    <div className="grid grid-cols-2 lg:grid-cols-3 items-center text-start">
+                      
+                      <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal whitespace-pre-line text-black ">
                         {item.designation}
                       </h2>
 
-                      {/* COL 2 - NAME */}
-                      <h2 className="text-[32px] md:text-[38px] lg:text-[44px] font-normal text-black ">
+                    
+                      <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal text-black ">
                         {item.name}
-                      </h2>
-
-                      {/* COL 3 - EMAIL BUTTON */}
+                      </h2> 
                       <a
                         href={`mailto:${item.email}`}
                         className="inline-flex w-fit px-6 py-3 border border-black rounded-full text-[18px] md:text-[20px] lg:text-[25.1px] tracking-tight hover:bg-black hover:text-white transition text-black "

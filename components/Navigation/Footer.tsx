@@ -81,7 +81,7 @@ const Footer = () => {
               return (
                 <div
                   key={index}
-                  className="relative overflow-hidden rounded-xl sm:rounded-xl transition-all duration-500 hover:shadow-2xl h-[650px] w-full"
+                  className="relative overflow-hidden rounded-xl sm:rounded-xl transition-all duration-500 hover:shadow-2xl min-h-[399px] lg:min-h-[599px] w-full"
                 >
                   {/* Image Section with Parallax */}
                   <div className="absolute inset-0 overflow-hidden">
@@ -130,14 +130,14 @@ const Footer = () => {
         ) : (
           <div className="w-full">
             <div className="w-full">
-              <div className="grid grid-cols-2 gap-5 mb-10">
+              <div className="grid rid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-5 mb-10">
               {contactcontent.map((item, index) => {
                 const parallaxOffset = scrollY * 15;
                 return (
                   <div
                     key={index}
                     style={{ backgroundColor: item.color }}
-                    className="rounded-2xl h-[75vh] md:h-[80vh] lg:h-[75vh]  overflow-hidden "
+                    className="rounded-2xl min-h-[399px] lg:min-h-[599px]  overflow-hidden "
                   >
                     {/* Content Overlay */}
                     <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">

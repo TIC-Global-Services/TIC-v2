@@ -13,7 +13,7 @@ const socialsCard = () => {
       alt="Mobile Mockup"
       width={820}
       height={815}
-      className="w-[480px] sm:w-[520px] md:w-[580px] lg:w-[650px] xl:w-[920px]  translate-x-5 translate-y-0"
+      className="w-[480px]  md:w-[580px] lg:w-[650px] xl:w-[920px]  translate-x-5 translate-y-0"
     />
   </div>
 
