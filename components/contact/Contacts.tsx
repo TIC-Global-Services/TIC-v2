@@ -29,7 +29,7 @@ const Contacts = () => {
                   <div key={index} className="pb-5 border-b border-black/50">
                     <div className="grid grid-cols-2 lg:grid-cols-3 items-center text-start">
                       
-                      <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal whitespace-pre-line text-black leading-[45.53px] tracking-[-2.63px] ">
+                      <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal whitespace-pre-line text-black leading-[45.53px] tracking-[-1.23px]  lg:tracking-[-2.63px] ">
                         {item.designation}
                       </h2>
 
