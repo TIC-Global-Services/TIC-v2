@@ -62,7 +62,7 @@ const getintouch = () => {
   return (
     // <div ></div>
     <div className="flex flex-col gap-5  bg-[#F5F5F5] ">
-      <h1 className="xL:text-[58px] lg:text-[108px] md:text-6xl text-4xl  font-normal text-black tracking-tighter xl:mt-80  lg:mt-90 md:mt-70 mt-40">
+      <h1 className="xL:text-[58px] lg:text-[88px] md:text-6xl text-4xl  font-medium text-black tracking-tighter xl:mt-70  lg:mt-50 md:mt-30 mt-30">
         Let's get in<br />
         touch
       </h1>

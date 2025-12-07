@@ -12,7 +12,7 @@ const Caara = () => {
           backgroundPosition: "center",
         }}
       >
-        <h1 className="text-white/30">
+        <h1 className="text-white/30 text-xs md:text-base">
           Caara isn’t just a jewelry brand—it’s a feeling. <br /> When we
           designed the logo, we imagined soft light, quiet elegance, and pieces
           that speak without saying too much. The result? A minimalistic mark
@@ -28,7 +28,7 @@ const Caara = () => {
           alt=""
           width={1000}
           height={500}
-          className="w-full h-auto"
+          className="w-full h-auto object-cover object-center"
         />
       </div>
     </>

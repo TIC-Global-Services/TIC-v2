@@ -108,14 +108,14 @@ const Hero = () => {
         </video>
 
         {/* Top-right paragraph */}
-        <div className="absolute top-15 right-15 max-w-xl tracking-tighter text-left text-black z-10">
+        <div className="absolute top-15 right-15 max-w-xl tracking-tighter text-left text-black z-10 pl-4">
           <p ref={topTextRef} className="text-lg md:text-xl font-medium">
             Eye-catching visuals for ads, websites, and product mockups. Artists use 3D tools to craft unique, collectible digital art. Visualize spaces before they're built. 3D environments for immersive shopping or brand experiences.
           </p>
         </div>
 
         {/* Bottom-left paragraph */}
-        <div className="absolute bottom-15 left-15 max-w-xl tracking-tighter text-left text-black z-10">
+        <div className="absolute bottom-15 left-15 max-w-xl tracking-tighter text-left text-black z-10 pr-4">
           <p ref={bottomTextRef} className="text-lg md:text-xl font-medium">
             Every website we create is designed with international UI/UX standards so that your brand looks credible across any audience, anywhere in the world.
           </p>

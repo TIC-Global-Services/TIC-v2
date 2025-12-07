@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface FormData {
   timestamp: string;
@@ -14,12 +14,12 @@ interface FormData {
 const Form = () => {
   const [currentQuestion, setCurrentQuestion] = useState(1);
   const [formData, setFormData] = useState<FormData>({
-    timestamp: '',
-    name: '',
-    email: '',
-    phone: '',
-    service: '',
-    category: ''
+    timestamp: "",
+    name: "",
+    email: "",
+    phone: "",
+    service: "",
+    category: "",
   });
   const [selectedServices, setSelectedServices] = useState<string[]>([]);
   const [errors, setErrors] = useState<Record<number, string>>({});
@@ -28,19 +28,19 @@ const Form = () => {
   const [countdown, setCountdown] = useState(3);
 
   useEffect(() => {
-    setFormData(prev => ({ ...prev, timestamp: new Date().toISOString() }));
+    setFormData((prev) => ({ ...prev, timestamp: new Date().toISOString() }));
   }, []);
 
   useEffect(() => {
     const handleKeyPress = (e: globalThis.KeyboardEvent) => {
-      if (e.key === 'Enter' && !showThankYou) {
+      if (e.key === "Enter" && !showThankYou) {
         e.preventDefault();
         handleEnterPress();
       }
     };
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
   }, [currentQuestion, formData, selectedServices, showThankYou]);
 
   useEffect(() => {
@@ -48,9 +48,26 @@ const Form = () => {
       const timer = setTimeout(() => setCountdown(countdown - 1), 1000);
       return () => clearTimeout(timer);
     } else if (countdown === 0) {
-      window.location.href = '/';
+      window.location.href = "/";
     }
   }, [showThankYou, countdown]);
+
+  function isValidInternationalPhone(phone: string) {
+    const cleaned = phone.trim();
+
+    // 1. Must start with +
+    if (!cleaned.startsWith("+")) return false;
+
+    // 2. Remove + and allow digits only
+    const digits = cleaned.slice(1).replace(/\s|[-()]/g, ""); // strip spaces, dashes, brackets
+
+    if (!/^\d+$/.test(digits)) return false;
+
+    // 3. Check length (E.164 standard)
+    if (digits.length < 8 || digits.length > 15) return false;
+
+    return true;
+  }
 
   const handleEnterPress = () => {
     switch (currentQuestion) {
@@ -58,7 +75,7 @@ const Form = () => {
         if (formData.name.trim()) {
           validateAndProceed(1);
         } else {
-          showError(1, 'Please enter your name');
+          showError(1, "Please enter your name");
         }
         break;
       case 2:
@@ -66,28 +83,28 @@ const Form = () => {
         if (emailRegex.test(formData.email.trim())) {
           validateAndProceed(2);
         } else {
-          showError(2, 'Please enter a valid email address');
+          showError(2, "Please enter a valid email address");
         }
         break;
       case 3:
         if (formData.phone.trim()) {
           validateAndProceed(3);
         } else {
-          showError(3, 'Please enter your phone number');
+          showError(3, "Please enter your phone number");
         }
         break;
       case 4:
         if (selectedServices.length > 0) {
           validateAndProceed(4);
         } else {
-          showError(4, 'Please select at least one service');
+          showError(4, "Please select at least one service");
         }
         break;
       case 5:
-        if (formData.category !== '') {
+        if (formData.category !== "") {
           handleSubmit();
         } else {
-          showError(5, 'Please select a category');
+          showError(5, "Please select a category");
         }
         break;
     }
@@ -95,42 +112,47 @@ const Form = () => {
 
   const validateAndProceed = (questionNum: number) => {
     let isValid = true;
-    let errorMsg = '';
+    let errorMsg = "";
 
     switch (questionNum) {
       case 1:
         if (!formData.name.trim()) {
           isValid = false;
-          errorMsg = 'Please enter your name';
+          errorMsg = "Please enter your name";
         }
         break;
+
       case 2:
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(formData.email.trim())) {
           isValid = false;
-          errorMsg = 'Please enter a valid email address';
+          errorMsg = "Please enter a valid email address";
         }
         break;
+
       case 3:
-        const phoneValue = formData.phone.trim();
-        if (!phoneValue) {
+        const phone = formData.phone.trim();
+
+        if (!phone) {
           isValid = false;
-          errorMsg = 'Please enter your phone number';
-        } else if (!/^\d{10}$/.test(phoneValue)) {
+          errorMsg = "Please enter your phone number";
+        } else if (!isValidInternationalPhone(phone)) {
           isValid = false;
-          errorMsg = 'Phone number must be exactly 10 digits and contain only numbers';
+          errorMsg =
+            "Please enter a valid phone number with country code (e.g. +1, +44, +91)";
         }
         break;
+
       case 4:
         if (selectedServices.length === 0) {
           isValid = false;
-          errorMsg = 'Please select at least one service';
+          errorMsg = "Please select at least one service";
         }
         break;
     }
 
     if (isValid) {
-      setErrors(prev => ({ ...prev, [questionNum]: '' }));
+      setErrors((prev) => ({ ...prev, [questionNum]: "" }));
       setCurrentQuestion(questionNum + 1);
     } else {
       showError(questionNum, errorMsg);
@@ -138,72 +160,82 @@ const Form = () => {
   };
 
   const showError = (questionNum: number, message: string) => {
-    setErrors(prev => ({ ...prev, [questionNum]: message }));
+    setErrors((prev) => ({ ...prev, [questionNum]: message }));
   };
 
   const toggleService = (value: string) => {
-    setSelectedServices(prev => {
+    setSelectedServices((prev) => {
       const newServices = prev.includes(value)
-        ? prev.filter(s => s !== value)
+        ? prev.filter((s) => s !== value)
         : [...prev, value];
-      
-      setFormData(prevData => ({
+
+      setFormData((prevData) => ({
         ...prevData,
-        service: newServices.join(', ')
+        service: newServices.join(", "),
       }));
-      
+
       return newServices;
     });
-    setErrors(prev => ({ ...prev, 4: '' }));
+    setErrors((prev) => ({ ...prev, 4: "" }));
   };
 
   const handleSubmit = async () => {
-    if (formData.category === '') {
-      showError(5, 'Please select a category');
+    if (formData.category === "") {
+      showError(5, "Please select a category");
       return;
     }
 
     setIsSubmitting(true);
 
     const formDataToSend = new FormData();
-    formDataToSend.append('timestamp', new Date().toISOString());
-    formDataToSend.append('name', formData.name);
-    formDataToSend.append('email', formData.email);
-    formDataToSend.append('phone', formData.phone);
-    formDataToSend.append('service', formData.service);
-    formDataToSend.append('category', formData.category);
+    formDataToSend.append("timestamp", new Date().toISOString());
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("phone", formData.phone);
+    formDataToSend.append("service", formData.service);
+    formDataToSend.append("category", formData.category);
 
     try {
-      await fetch('https://script.google.com/macros/s/AKfycby_-WXohq88Pq_83VfU8BTDjOcCZnASGRWcEpu954o6psL2aSeNQHQnQaYRK6GGsBClWg/exec', {
-        method: 'POST',
-        body: formDataToSend
-      });
+      await fetch(
+        "https://script.google.com/macros/s/AKfycby_-WXohq88Pq_83VfU8BTDjOcCZnASGRWcEpu954o6psL2aSeNQHQnQaYRK6GGsBClWg/exec",
+        {
+          method: "POST",
+          body: formDataToSend,
+        }
+      );
       setShowThankYou(true);
     } catch (error) {
-      console.error('Error:', error);
-      showError(5, 'There was an error submitting the form. Please try again.');
+      console.error("Error:", error);
+      showError(5, "There was an error submitting the form. Please try again.");
       setIsSubmitting(false);
     }
   };
 
   const services = [
-    { value: 'branding', label: 'Branding' },
-    { value: 'website-development', label: 'Website Development' },
-    { value: 'mobile-app-development', label: 'Mobile App Development' },
-    { value: 'ui-ux-design', label: 'UI/UX Design' },
-    { value: 'brand-photoshoots', label: 'Brand Photoshoots' },
-    { value: 'social-media-marketing', label: 'Social Media Marketing' }
+    { value: "branding", label: "Branding" },
+    { value: "website-development", label: "Website Development" },
+    { value: "mobile-app-development", label: "Mobile App Development" },
+    { value: "ui-ux-design", label: "UI/UX Design" },
+    { value: "brand-photoshoots", label: "Brand Photoshoots" },
+    { value: "social-media-marketing", label: "Social Media Marketing" },
   ];
 
   const categories = [
-    'Products', 'Services', 'E-Brands', 'Events', 
-    'Media', 'Private Label', 'Celebrity', 'Corporate', 'Other'
+    "Products",
+    "Services",
+    "ECommerce-Brands",
+    "Events",
+    "Media",
+    "Private Label",
+    "Celebrity",
+    "Corporate",
+    "Other",
   ];
 
   const progress = showThankYou ? 100 : ((currentQuestion - 1) / 5) * 100;
 
   return (
-    <div className="min-h-screen w-full bg-black flex items-center justify-center p-5 md:p-10 font-sans text-white relative overflow-y-auto">
+    <div className="min-h-screen w-full bg-black flex items-center justify-center p-5 md:p-10  text-white relative overflow-y-auto">
       <div className="w-full max-w-[700px]">
         {/* Question 1: Name */}
         {currentQuestion === 1 && !showThankYou && (
@@ -215,7 +247,9 @@ const Form = () => {
               <input
                 type="text"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 placeholder="Type your answer here..."
                 className="w-full py-3 bg-transparent border-none border-b-2 border-white/30 text-white text-2xl focus:outline-none transition-all"
                 autoFocus
@@ -247,8 +281,18 @@ const Form = () => {
                 onClick={() => setCurrentQuestion(1)}
                 className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-medium cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5M12 19l-7-7 7-7" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 12H5M12 19l-7-7 7-7"
+                  />
                 </svg>
               </button>
             </div>
@@ -259,7 +303,9 @@ const Form = () => {
               <input
                 type="email"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 placeholder="name@example.com"
                 className="w-full py-3 bg-transparent border-none border-b-2 border-white/30 text-white text-2xl focus:outline-none transition-all"
                 autoFocus
@@ -291,8 +337,18 @@ const Form = () => {
                 onClick={() => setCurrentQuestion(2)}
                 className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-medium cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5M12 19l-7-7 7-7" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 12H5M12 19l-7-7 7-7"
+                  />
                 </svg>
               </button>
             </div>
@@ -303,7 +359,9 @@ const Form = () => {
               <input
                 type="tel"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, phone: e.target.value })
+                }
                 placeholder="+1 (555) 000-0000"
                 className="w-full py-3 bg-transparent border-none border-b-2 border-white/30 text-white text-2xl focus:outline-none transition-all"
                 autoFocus
@@ -335,8 +393,18 @@ const Form = () => {
                 onClick={() => setCurrentQuestion(3)}
                 className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-medium cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5M12 19l-7-7 7-7" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 12H5M12 19l-7-7 7-7"
+                  />
                 </svg>
               </button>
             </div>
@@ -354,16 +422,18 @@ const Form = () => {
                     onClick={() => toggleService(service.value)}
                     className={`p-4 rounded-lg cursor-pointer transition-all ${
                       selectedServices.includes(service.value)
-                        ? 'bg-white/20'
-                        : 'bg-white/10 hover:bg-white/15'
+                        ? "bg-white/20"
+                        : "bg-white/10 hover:bg-white/15"
                     }`}
                   >
                     <div className="flex items-center">
-                      <div className={`w-5 h-5 border-2 rounded mr-3 transition-all relative ${
-                        selectedServices.includes(service.value)
-                          ? 'bg-white border-white'
-                          : 'border-white/50'
-                      }`}>
+                      <div
+                        className={`w-5 h-5 border-2 rounded mr-3 transition-all relative ${
+                          selectedServices.includes(service.value)
+                            ? "bg-white border-white"
+                            : "border-white/50"
+                        }`}
+                      >
                         {selectedServices.includes(service.value) && (
                           <div className="absolute left-[6px] top-[2px] w-[5px] h-[10px] border-black border-r-2 border-b-2 transform rotate-45" />
                         )}
@@ -374,9 +444,7 @@ const Form = () => {
                 ))}
               </div>
               {errors[4] && (
-                <div className="text-red-400 text-sm mt-1.5">
-                  {errors[4]}
-                </div>
+                <div className="text-red-400 text-sm mt-1.5">{errors[4]}</div>
               )}
             </div>
             <div className="flex items-center gap-4">
@@ -398,8 +466,18 @@ const Form = () => {
                 onClick={() => setCurrentQuestion(4)}
                 className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-medium cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 12H5M12 19l-7-7 7-7" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 12H5M12 19l-7-7 7-7"
+                  />
                 </svg>
               </button>
             </div>
@@ -409,7 +487,9 @@ const Form = () => {
             <div className="relative mb-10">
               <select
                 value={formData.category}
-                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, category: e.target.value })
+                }
                 className="w-full py-3 bg-transparent border-none border-b-2 border-white/30 text-white text-2xl focus:outline-none transition-all appearance-none cursor-pointer"
                 autoFocus
               >
@@ -417,15 +497,29 @@ const Form = () => {
                   Select a category...
                 </option>
                 {categories.map((cat) => (
-                  <option key={cat} value={cat.toLowerCase()} className="bg-[#1a1a1a] text-white">
+                  <option
+                    key={cat}
+                    value={cat.toLowerCase()}
+                    className="bg-[#1a1a1a] text-white"
+                  >
                     {cat}
                   </option>
                 ))}
               </select>
               <div className="input-line absolute bottom-0 left-0 h-0.5 bg-white transition-all duration-500" />
               <div className="absolute right-0 top-1/2 -translate-y-1/2 pointer-events-none text-white">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <polyline points="6 9 12 15 18 9" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                <svg
+                  className="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <polyline
+                    points="6 9 12 15 18 9"
+                    strokeWidth={2}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
               </div>
               {errors[5] && (
@@ -440,7 +534,7 @@ const Form = () => {
                 disabled={isSubmitting}
                 className="bg-white text-black px-5 py-2.5 rounded-full text-base font-medium cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all disabled:opacity-50"
               >
-                {isSubmitting ? 'Submitting...' : 'OK'}
+                {isSubmitting ? "Submitting..." : "OK"}
               </button>
             </div>
           </div>
@@ -475,9 +569,18 @@ const Form = () => {
 
       <style jsx>{`
         @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          20%, 60% { transform: translateX(-5px); }
-          40%, 80% { transform: translateX(5px); }
+          0%,
+          100% {
+            transform: translateX(0);
+          }
+          20%,
+          60% {
+            transform: translateX(-5px);
+          }
+          40%,
+          80% {
+            transform: translateX(5px);
+          }
         }
         .animate-shake {
           animation: shake 0.5s;

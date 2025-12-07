@@ -131,43 +131,46 @@ const Footer = () => {
           <div className="w-full">
             <div className="w-full">
               <div className="grid rid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-5 mb-10">
-              {contactcontent.map((item, index) => {
-                const parallaxOffset = scrollY * 15;
-                return (
-                  <div
-                    key={index}
-                    style={{ backgroundColor: item.color }}
-                    className="rounded-2xl min-h-[399px] lg:min-h-[599px]  overflow-hidden "
-                  >
-                    {/* Content Overlay */}
-                    <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
-                      {/* Title at Top */}
-                      <div>
-                        <h3 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl max-w-full sm:max-w-[400px] md:max-w-[470px] leading-tight sm:leading-[40px] md:leading-[50px] tracking-[-0.07em] font-normal ${index==0 ?"text-white" : "text-black"} `}>
-                          {item.name}
-                        </h3>
-                      </div>
+                {contactcontent.map((item, index) => {
+                  const parallaxOffset = scrollY * 15;
+                  return (
+                    <div
+                      key={index}
+                      style={{ backgroundColor: item.color }}
+                      className="rounded-2xl min-h-[399px] lg:min-h-[599px]  overflow-hidden "
+                    >
+                      {/* Content Overlay */}
+                      <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
+                        {/* Title at Top */}
+                        <div>
+                          <h3
+                            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-5xl max-w-full sm:max-w-[400px] md:max-w-[470px] leading-tight sm:leading-[40px] md:leading-[50px] tracking-[-0.07em] font-normal ${
+                              index == 0 ? "text-white" : "text-black"
+                            } `}
+                          >
+                            {item.name}
+                          </h3>
+                        </div>
 
-                      {/* Button at Bottom */}
-                      <div className="flex justify-start">
-                        <a
-                          // href={item.link}
-                          className={`inline-flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-transparent border ${
-                            index == 0
-                              ? "border-white text-white"
-                              : "border-black text-black"
-                          } font-normal rounded-full transition-all duration-300 hover:bg-white hover:text-black tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]`}
-                        >
-                          {item.button}
-                        </a>
+                        {/* Button at Bottom */}
+                        <div className="flex justify-start">
+                          <a
+                            // href={item.link}
+                            className={`inline-flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-transparent border ${
+                              index == 0
+                                ? "border-white text-white"
+                                : "border-black text-black"
+                            } font-normal rounded-full transition-all duration-300 hover:bg-white hover:text-black tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]`}
+                          >
+                            {item.button}
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
-            </div>
-            
           </div>
         )}
 
@@ -251,10 +254,10 @@ const Footer = () => {
             isWhiteBg ? " text-black bg-[#F5F5F5]" : "text-white bg-black"
           } py-1 px-6`}
         >
-          <div className="flex justify-around font-light items-center lg:gap-25 flex-col lg:flex-row gap-2 text-[7px] md:text-[15px] lg:text-[16px]">
+          <div className="flex justify-between font-light items-center lg:gap-25 flex-col lg:flex-row gap-2 text-[9px] md:text-[15px] lg:text-[16px] px-10">
             <ul className="flex font-light gap-1 lg:gap-3 opacity-90">
               <li>
-                <a href="#">Home</a>
+                <a href="/">Home</a>
               </li>
               <li>
                 <a href="/about">About</a>
@@ -278,7 +281,10 @@ const Footer = () => {
           </div>
 
           <div className="flex flex-wrap justify-center">
-            <span className="font-light leading-none lg:text-[165px] text-[28px] md:text-[80px] text-center tracking-tight">
+            <span
+              className="font-light leading-none text-center tracking-tight"
+              style={{ fontSize: "11vw" }}
+            >
               TheInternetCompany
             </span>
           </div>

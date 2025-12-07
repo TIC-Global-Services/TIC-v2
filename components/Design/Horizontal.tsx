@@ -22,9 +22,9 @@ const Horizontal: React.FC = () => {
 
   const handleClick = () => {
     // Create a temporary link element to trigger download
-    const link = document.createElement('a');
-    link.href = '/BrandBooks/Atlya.pdf'; // Update this path to your actual PDF file
-    link.download = 'Atlya.pdf';
+    const link = document.createElement("a");
+    link.href = "/BrandBooks/Atlya.pdf"; // Update this path to your actual PDF file
+    link.download = "Atlya.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -94,7 +94,7 @@ const Horizontal: React.FC = () => {
   return (
     <div className="bg-[#f5f5f5]">
       {/* Horizontal scroll container */}
-      <div ref={containerRef} className="h-screen overflow-hidden relative cursor-none">
+      <div ref={containerRef} className="h-screen overflow-hidden relative">
         {isHovering && (
           <div
             className="fixed pointer-events-none z-50 transition-opacity duration-200 flex items-center gap-3"
@@ -124,10 +124,6 @@ const Horizontal: React.FC = () => {
               backgroundPosition: "center",
             }}
             className="relative h-screen w-screen flex items-center justify-center flex-shrink-0"
-            onMouseMove={handleMouseMove}
-            onMouseEnter={() => setIsHovering(true)}
-            onMouseLeave={() => setIsHovering(false)}
-            onClick={handleClick}
           >
             <h1 className="text-black absolute top-16 right-10 max-w-md text-xl tracking-tighter">
               The primary font used for heading is "Robodron". This remains
@@ -239,7 +235,16 @@ const Horizontal: React.FC = () => {
             </div>
           </section>
 
-          <section className="h-screen w-screen flex items-center justify-center bg-white flex-shrink-0">
+          <section
+            id="atlya"
+            onMouseMove={handleMouseMove}
+            onMouseEnter={() => setIsHovering(true)}
+            onMouseLeave={() => setIsHovering(false)}
+            onClick={handleClick}
+            className={`h-screen w-screen flex items-center justify-center bg-white flex-shrink-0 ${
+              isHovering ? "cursor-none" : "cursor-pointer"
+            }`}
+          >
             <div className="flex flex-row items-center justify-center px-5">
               <div className="flex">
                 <Image

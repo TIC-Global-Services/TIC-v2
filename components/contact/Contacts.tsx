@@ -3,11 +3,13 @@ import React from "react";
 const contacpersonList = [
   {
     name: "GokZ",
+    emoji :"/icons/disguised-face.png",
     designation: "Director of\n Design",
     email: "design@theinternetcompany.one",
   },
   {
     name: "Manoj",
+    emoji :"/icons/smiling-face-with-sunglasses.png",
     designation: "Director of\n Development",
     email: "dev@theinternetcompany.one",
   },
@@ -32,10 +34,9 @@ const Contacts = () => {
                       <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal whitespace-pre-line text-black leading-[45.53px] tracking-[-1.23px]  lg:tracking-[-2.63px] ">
                         {item.designation}
                       </h2>
-
-                    
-                      <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal text-black ">
-                        {item.name}
+                           
+                      <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal text-black  tracking-tighter flex items-center gap-2">
+                        {item.name} <span> <img src={item.emoji} alt={item.name} className=" w-12 h-12" /></span>
                       </h2> 
                       <a
                         href={`mailto:${item.email}`}

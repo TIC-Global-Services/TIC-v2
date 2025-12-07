@@ -1,66 +1,234 @@
-import { Client1, Client2, Client3, Client4, Client5, Client6, Client7, Client8, Client9, Client10, Client11, Client12, Client13, Client14, Client15, Client16, Client17, Client18, Client19, Client20, Client21, Client22, Client23, Client24, Client25, Client26, Client27, Client28, Client29, Client30, Client31, Client32, Client33, Client34, Client35, Client36, Client37, Client38, Client39, Client40, Client41, Client42, Client43, Client44, Client45, Client46, Client47, Client48, Client49, Client50, Client51, Client52, Client53, Client54, Client55, Client56, Client57 } from "@/assets/About";
-
-
 export const ClienteleData = [
-    {w:'',h:'', img:Client3},
-    // {w:'90px',h:'90px', img:Client1},
-    {w:'',h:'', img:Client2},
-    {w:'',h:'', img:Client4},
-    {w:'',h:'', img:Client5},
-    {w:'',h:'', img:Client6},
-    {w:'',h:'', img:Client7},
-    {w:'',h:'', img:Client8},
-    {w:'',h:'', img:Client9},
-    {w:'',h:'', img:Client10},
-    {w:'',h:'', img:Client11},
-    {w:'',h:'', img:Client12},
-    {w:'',h:'', img:Client13},
-    {w:'',h:'', img:Client14},
-    {w:'',h:'', img:Client15},
-    {w:'',h:'', img:Client16},
-    {w:'',h:'', img:Client17},
-    {w:'',h:'', img:Client18},
-    {w:'',h:'', img:Client19},
-    {w:'',h:'', img:Client20},
-    {w:'',h:'', img:Client21},
-    {w:'',h:'', img:Client22},
-    {w:'',h:'', img:Client23},
-    {w:'',h:'', img:Client24},
-    {w:'',h:'', img:Client25},
-    {w:'',h:'', img:Client26},
-    {w:'',h:'', img:Client27},
-    {w:'',h:'', img:Client28},
-    {w:'',h:'', img:Client29},
-    {w:'',h:'', img:Client30},
-    {w:'',h:'', img:Client31},
-    {w:'',h:'', img:Client32},
-    {w:'',h:'', img:Client33},
-    {w:'',h:'', img:Client34},
-    {w:'',h:'', img:Client35},
-    {w:'',h:'', img:Client36},
-    {w:'',h:'', img:Client37},
-    {w:'',h:'', img:Client38},
-    {w:'',h:'', img:Client39},
-    {w:'',h:'', img:Client40},
-    {w:'',h:'', img:Client41},
-    {w:'',h:'', img:Client42},
-    {w:'',h:'', img:Client43},
-    {w:'',h:'', img:Client44},
-    {w:'',h:'', img:Client45},
-    {w:'',h:'', img:Client46},
-    {w:'',h:'', img:Client47},
-    {w:'',h:'', img:Client48},
-    {w:'',h:'', img:Client49},
-    {w:'',h:'', img:Client50},
-    {w:'',h:'', img:Client51},
-    {w:'',h:'', img:Client52},
-    {w:'',h:'', img:Client53},
-    {w:'',h:'', img:Client54},
-    {w:'',h:'', img:Client55},
-    {w:'',h:'', img:Client56},
-    {w:'',h:'', img:Client57},
-
-
-
-    
-]
+  {
+    name: "Adinn",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/adinn.png?updatedAt=1759923781669",
+  },
+  {
+    name: "Perky Paws",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/perky.png?updatedAt=1759923781514",
+  },
+  {
+    name: "Haus of chaos",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/hoc.png?updatedAt=1759923781546",
+  },
+  {
+    name: "Enclave",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/enclave.png?updatedAt=1759923781145",
+  },
+  {
+    name: "Maxclean",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/maxclean.png?updatedAt=1759923781619",
+  },
+  {
+    name: "Innovative Interiors",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/innovative.png?updatedAt=1759923781255",
+  },
+  {
+    name: "Bulk Beings",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/bulk.png?updatedAt=1759923781914",
+  },
+  {
+    name: "Fujitec",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/fujitex.png?updatedAt=1759923781629",
+  },
+  {
+    name: "Secure Steps",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/secure.png?updatedAt=1759923781594",
+  },
+  {
+    name: "Uniconnect",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/uniconnect.png?updatedAt=1759923781991",
+  },
+  {
+    name: "Vols",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/vols.png?updatedAt=1759923781650",
+  },
+  {
+    name: "Rimark",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/rimark.png?updatedAt=1759923781515",
+  },
+  {
+    name: "Pro generation power",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/pro.png?updatedAt=1759923781519",
+  },
+  {
+    name: "Zapp",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/zapp.png?updatedAt=1759923781531",
+  },
+  {
+    name: "Pocket Heart",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/pocket.png?updatedAt=1759923781451",
+  },
+  {
+    name: "Techworq",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/tecworq.png?updatedAt=1759923781498",
+  },
+  {
+    name: "JMJ",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/jmj.png?updatedAt=1759923781418",
+  },
+  {
+    name: "Redpanda",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/redpanda.png?updatedAt=1759923781380",
+  },
+  {
+    name: "Pink camel",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/pink.png?updatedAt=1759923781347",
+  },
+  {
+    name: "Atyalabs",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/atyalabs.png?updatedAt=1759923781363",
+  },
+  {
+    name: "Techventure",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/tech.png?updatedAt=1759923781541",
+  },
+  {
+    name: "Ukiyo",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/ukiyo.png?updatedAt=1759923781509",
+  },
+  {
+    name: "Pointinble",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/point.png?updatedAt=1759923782014",
+  },
+  {
+    name: "Medium turtles",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/medium.png?updatedAt=1759923781659",
+  },
+  {
+    name: "Crafters",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/crafters.png?updatedAt=1759923781617",
+  },
+  {
+    name: "Fornia",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/fornia.png?updatedAt=1759923781198",
+  },
+  {
+    name: "Wazir",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/wazir.png?updatedAt=1759923781641",
+  },
+  {
+    name: "PayEasy",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/pay.png?updatedAt=1759923781529",
+  },
+  {
+    name: "Hisin",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/hisin.webp?updatedAt=1759923781653",
+  },
+  {
+    name: "Bad lies",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/bad.avif?updatedAt=1759924069552",
+  },
+  {
+    name: "Hurra",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/hurra.avif?updatedAt=1759923781560",
+  },
+  {
+    name: "Samsara",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/samsara.png?updatedAt=1759923781646",
+  },
+  {
+    name: "Breakout",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/break.png?updatedAt=1759923781201",
+  },
+  {
+    name: "Spotlight",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/spotlight.png?updatedAt=1759923781335",
+  },
+  {
+    name: "Karmhe company",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/karmhe.png?updatedAt=1759923781933",
+  },
+  {
+    name: "Northstar",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/north.png?updatedAt=1759923781998",
+  },
+  {
+    name: "2.0",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/2.webp?updatedAt=1759923781611",
+  },
+  {
+    name: "Bankaru",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/bankuru.png?updatedAt=1759923780842",
+  },
+  {
+    name: "Hashmint",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/hashmint.png?updatedAt=1759923781601",
+  },
+  {
+    name: "Payatom",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/payatomcl.png?updatedAt=1759923781422",
+  },
+  {
+    name: "Staap",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/stapp.png?updatedAt=1759923781428",
+  },
+  {
+    name: "Locus",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/locus.png?updatedAt=1759923781254",
+  },
+  {
+    name: "Iluminate",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/locus.png?updatedAt=1759923781254",
+  },
+  {
+    name: "Prime",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/prime.webp?updatedAt=1759923781685",
+  },
+  {
+    name: "Spatial Grid",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/spatial.svg?updatedAt=1759923781504",
+  },
+  {
+    name: "Savita",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/summr.png?updatedAt=1759923781549",
+  },
+  {
+    name: "Canary",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/canary.png?updatedAt=1759923781491",
+  },
+  {
+    name: "Vesenex",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/ves.png?updatedAt=1759923781495",
+  },
+  {
+    name: "Saba Group",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/saba.png?updatedAt=1759923781502",
+  },
+  {
+    name: "Summr",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/summr.png?updatedAt=1759923781549",
+  },
+  {
+    name: "NRC",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/nrc.png?updatedAt=1759923781969",
+  },
+  {
+    name: "Allcap",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/allcap.png?updatedAt=1759923781217",
+  },
+  {
+    name: "BCF",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/bcf.png?updatedAt=1759923780761",
+  },
+  {
+    name: "Akwad",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/akwad.jpeg?updatedAt=1759923781533",
+  },
+  {
+    name: "Agasti",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/Agasti_Logo.png",
+  },
+  {
+    name: "Aauraa",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/aauraa%201.png",
+  },
+  {
+    name: "Autonomous",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/Client%2057.png",
+  },
+  {
+    name: "Domestica",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/Client%2058.png",
+  },
+];

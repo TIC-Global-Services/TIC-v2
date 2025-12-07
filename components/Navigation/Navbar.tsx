@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import { getCalApi } from "@calcom/embed-react";
 import Image from "next/image";
 import Link from "next/link";
 import { gsap } from "gsap";
@@ -22,12 +23,12 @@ const navItems = [
     name: "Client Portal",
     link: "/client",
   },
-  // {
-  //   name: "Your Brand",
-  //   link: "/",
-  // },
+  {
+    name: "Your Brand",
+    link: "http://branding.theinternetcompany.one/",
+  },
   { name: "Archive", link: "/archive" },
-  {name:"Contact",link:"/contact"},
+  { name: "Contact", link: "/contact" },
   { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
 ];
 
@@ -42,12 +43,12 @@ const FnavItems = [
     name: "Client Portal",
     link: "/client",
   },
-  // {
-  //   name: "Your Brand",
-  //   link: "/",
-  // },
+  {
+    name: "Your Brand",
+    link: "http://branding.theinternetcompany.one/",
+  },
   { name: "Archive", link: "/archive" },
-  {name:"Contact",link:"/contact"}, 
+  { name: "Contact", link: "/contact" },
   // { name: "Contact", link: "https://www.theinternetcompany.one/contact" },
   { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
 ];
@@ -67,14 +68,24 @@ const Navbar = () => {
 
   const pathname = usePathname();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [bgStyle, setBgStyle] = useState({ left: 83, width: 125, opacity: 0 });
+  const [bgStyle, setBgStyle] = useState({ left: 0, width: 100, opacity: 0 });
   const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const isWhiteBg =
-    pathname === "/contact" || pathname === "/archive" || pathname === "/about" || pathname === "/";
+    pathname === "/contact" ||
+    pathname === "/archive" ||
+    pathname === "/about" ||
+    pathname === "/";
 
   const isClient = pathname === "/client";
+
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "discovery-call" });
+      cal("ui", { hideEventTypeDetails: false, layout: "column_view" });
+    })();
+  }, []);
 
   // Setup initial element states
   const setupInitialStates = useCallback(() => {
@@ -331,9 +342,14 @@ const Navbar = () => {
   //     setBgStyle((prev) => ({ ...prev, opacity: 0 }));
   //   }
   // }, [hoveredIndex, activeIndex]);
+
+  useEffect(() => {
+    const index = navItems.findIndex((item) => item.link === pathname);
+    setActiveIndex(index === -1 ? null : index);
+  }, [pathname]);
+
   useEffect(() => {
     const index = hoveredIndex ?? activeIndex;
-    // No active/hover → hide background
     if (index === null) {
       setBgStyle((prev) => ({ ...prev, opacity: 0 }));
       return;
@@ -343,13 +359,13 @@ const Navbar = () => {
 
     const { offsetLeft, offsetWidth } = target;
 
-    // Move highlight under the element
     setBgStyle({
       left: offsetLeft,
       width: offsetWidth,
       opacity: 1,
     });
   }, [hoveredIndex, activeIndex]);
+
   return (
     <>
       {/* Main Navigation */}
@@ -397,10 +413,10 @@ const Navbar = () => {
               </Link>
             ))}
           </div> */}
-          <div className="relative hidden lg:flex flex-row justify-center items-center bg-white/20 backdrop-blur-md rounded-[20.52px] px-2 max-w-[643px] ">
+          <div className="relative hidden lg:flex flex-row justify-center items-center bg-white/20 backdrop-blur-md rounded-[20.52px] px-2 ">
             {/* Floating background that moves to hovered/active item */}
             <div
-              className="absolute bg-black/90 rounded-[15.32px]  transition-all duration-300 ease-out"
+              className="absolute bg-black/90 rounded-[15.32px]  transition-all duration-300 ease-out "
               style={{
                 left: `${bgStyle.left}px`,
                 width: `${bgStyle.width}px`,
@@ -423,16 +439,16 @@ const Navbar = () => {
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                <div className="text-center pt-[13px] pl-[16px] pb-[13px] pr-[16px]">
+                <div className="text-center pt-[13px] pb-[13px] px-5">
                   <span
                     className={`
-    text-[14.9px] md:text-[13.5px] font-normal whitespace-nowrap
-    ${isWhiteBg !=undefined &&
-      isWhiteBg
-        ? hoveredIndex === index
-          ? "text-white"
-          : "text-black"
-        : "text-white"
+    text-[14.9px] md:text-[13.5px] font-normal whitespace-nowrap transition-colors duration-300
+    ${
+      index === activeIndex || index === hoveredIndex
+        ? "text-white"
+        : isWhiteBg
+        ? "text-black"
+        : "text-white/70"
     }
   `}
                   >
@@ -444,12 +460,14 @@ const Navbar = () => {
           </div>
 
           {/* CTA Button - Responsive sizing */}
-          <Link
-            href="/contact"
-            className="text-sm sm:text-base lg:text-[16px] p-(14px,20px,14px,20px) sm:px-4  rounded-[12px] font-light transition-all duration-300 shadow-lg bg-black text-white px-5 py-2  hover:bg-black/80"
+          <button
+            data-cal-namespace="discovery-call"
+            data-cal-link="theinternetcompany/discovery-call"
+            data-cal-config='{"layout":"column_view"}'
+            className="text-sm cursor-pointer sm:text-base lg:text-[16px] p-(14px,20px,14px,20px) sm:px-4  rounded-[12px] font-light transition-all duration-300 shadow-lg bg-black text-white px-5 py-2  hover:bg-black/80"
           >
             Let&apos;s talk
-          </Link>
+          </button>
         </Container>
       </nav>
 
@@ -537,8 +555,14 @@ const Navbar = () => {
             {/* Social Links */}
             <div ref={socialLinksRef} className="flex flex-col items-start">
               {[
-                { href: "https://www.instagram.com/the.internetcompany", label: "Instagram" },
-                { href: "https://www.linkedin.com/company/tic-global-services/", label: "LinkedIn" },
+                {
+                  href: "https://www.instagram.com/the.internetcompany",
+                  label: "Instagram",
+                },
+                {
+                  href: "https://www.linkedin.com/company/tic-global-services/",
+                  label: "LinkedIn",
+                },
               ].map(({ href, label }) => (
                 <a
                   key={label}
@@ -584,13 +608,13 @@ const Navbar = () => {
 
           {/* Contact Button - Bottom Left */}
           <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8">
-            <Link href={'/contact'}>
-            <button
-              onClick={handleLinkClick}
-              className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition-all text-sm sm:text-base"
-            >
-              contact
-            </button>
+            <Link href={"/contact"}>
+              <button
+                onClick={handleLinkClick}
+                className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition-all text-sm sm:text-base"
+              >
+                contact
+              </button>
             </Link>
           </div>
         </div>

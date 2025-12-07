@@ -1,6 +1,7 @@
 export const Client1 ='https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/2.webp?updatedAt=1759923781611'
 export const Client2 ='https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/bad.avif?updatedAt=1759924069552'
 export const Client3 ='https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/adinn.png?updatedAt=1759923781669'
+
 export const Client4 ='https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/adwin.png?updatedAt=1759923781626'
 export const Client5 ='https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/akwad.jpeg?updatedAt=1759923781533'
 export const Client6 ='https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/allcap.png?updatedAt=1759923781217'
@@ -60,7 +61,7 @@ export const Client57= 'https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Client
 
 
 //Founder 
-export const FounderImage = 'https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/pragya.PNG?updatedAt=1759923781553'
+export const FounderImage = 'https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/about/Profile.png'
 export {default as InstaLogo} from '@/assets/About/Founder/instagram.png'
 export {default as LinkLogo} from '@/assets/About/Founder/linkedin.png'
     

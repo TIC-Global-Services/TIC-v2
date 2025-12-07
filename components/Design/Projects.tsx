@@ -40,21 +40,21 @@ const Projects = () => {
     });
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setCursorPos({ x: e.clientX, y: e.clientY });
-  };
+  // const handleMouseMove = (e: React.MouseEvent) => {
+  //   setCursorPos({ x: e.clientX, y: e.clientY });
+  // };
 
   const currentHeight = imageHeights[currentIndex] || 56.25;
 
-    const handleClick = () => {
-    // Create a temporary link element to trigger download
-    const link = document.createElement('a');
-    link.href = '/brandbook.pdf'; // Update this path to your actual PDF file
-    link.download = 'brandbook.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  //   const handleClick = () => {
+  //   // Create a temporary link element to trigger download
+  //   const link = document.createElement('a');
+  //   link.href = '/brandbook.pdf'; // Update this path to your actual PDF file
+  //   link.download = 'brandbook.pdf';
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
 
   return (
     <div className="bg-white min-h-[100dvh] w-full pt-20 flex flex-col items-center justify-center">
@@ -63,11 +63,11 @@ const Projects = () => {
       </h1>
 
       <div
-        className="relative w-full max-w-8xl overflow-hidden shadow-lg cursor-none"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-         onClick={handleClick}
+        className="relative w-full max-w-8xl overflow-hidden shadow-lg "
+        // onMouseMove={handleMouseMove}
+        // onMouseEnter={() => setIsHovering(true)}
+        // onMouseLeave={() => setIsHovering(false)}
+        // onClick={handleClick}
       >
         <div
           className="relative transition-all duration-700 ease-in-out"

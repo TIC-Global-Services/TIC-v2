@@ -3,58 +3,41 @@ import React, { useState } from "react";
 import Image from "next/image";
 
 const Attar = () => {
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  // const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
+  // const [isHovering, setIsHovering] = useState(false);
 
-  const handleClick = () => {
-    const link = document.createElement("a");
-    link.href = "/BrandBooks/AMAE.pdf"; 
-    link.download = "AMAE.pdf";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
+  // const handleClick = () => {
+  //   const link = document.createElement("a");
+  //   link.href = "/BrandBooks/AMAE.pdf"; 
+  //   link.download = "AMAE.pdf";
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    setCursorPos({ x: e.clientX, y: e.clientY });
-  };
+  // const handleMouseMove = (e: React.MouseEvent) => {
+  //   setCursorPos({ x: e.clientX, y: e.clientY });
+  // };
 
   return (
     <div>
       {/* === FIRST SECTION WITH SPECIAL CURSOR === */}
       <section
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => setIsHovering(false)}
-        onClick={handleClick}
-        className="relative cursor-none" // hides the default cursor
+        // onMouseMove={handleMouseMove}
+        // onMouseEnter={() => setIsHovering(true)}
+        // onMouseLeave={() => setIsHovering(false)}
+        // onClick={handleClick}
+        className="relative " // hides the default cursor
       >
         <Image
           src="https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/TIC%20Official/attar.png?updatedAt=1761809418016"
           alt="Attar Bazzar"
           width={1500}
           height={1500}
-          className="w-full h-[900px]"
+          className="w-full h-[900px] object-cover object-center"
         />
 
-        {/* Custom cursor visible only inside this section */}
-        {isHovering && (
-          <div
-            className="fixed pointer-events-none z-50 transition-opacity duration-150 flex items-center gap-3"
-            style={{
-              left: `${cursorPos.x}px`,
-              top: `${cursorPos.y}px`,
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <div className="relative w-12 h-12 rounded-full border-2 border-white flex items-center justify-center">
-              <div className="w-2 h-2 rounded-full bg-white" />
-            </div>
-            <div className="text-white text-2xl font-medium whitespace-nowrap">
-              click to view brandbook
-            </div>
-          </div>
-        )}
+       
       </section>
 
       {/* === SECOND SECTION === */}
@@ -65,11 +48,11 @@ const Attar = () => {
             alt="Perky paws"
             width={400}
             height={400}
-            className="object-contain"
+            className="object-cover"
           />
         </div>
 
-        <h1 className="text-white text-lg max-w-6xl mb-6">
+        <h1 className="text-white  max-w-6xl mb-6 text-xs md:text-lg">
           We built this logo & Packaging to make sure Playful Paws Meet Purrfect
           Products. We use vibrant purple (#6d00c2) and tangy orange (#ffb552)
           for our primary colors, playfully contrasted by a lineup of cool and
@@ -84,7 +67,7 @@ const Attar = () => {
           alt="Pearky Paws"
           width={1500}
           height={1500}
-          className="w-full h-[800px]"
+          className="w-full h-[800px] object-cover"
         />
       </section>
     </div>
