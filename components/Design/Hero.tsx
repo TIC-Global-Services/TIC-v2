@@ -13,7 +13,7 @@ const Hero = () => {
   useEffect(() => {
     // Split text into characters for top text
     const topSplit = new SplitText(topTextRef.current, { type: "chars" });
-    
+
     // Split text into characters for bottom text
     const bottomSplit = new SplitText(bottomTextRef.current, { type: "chars" });
 
@@ -34,8 +34,8 @@ const Hero = () => {
           trigger: topTextRef.current,
           start: "top 80%",
           end: "top 20%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       }
     );
 
@@ -56,8 +56,8 @@ const Hero = () => {
           trigger: bottomTextRef.current,
           start: "top 80%",
           end: "top 20%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       }
     );
 
@@ -65,17 +65,19 @@ const Hero = () => {
     return () => {
       topSplit.revert();
       bottomSplit.revert();
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
   return (
     <>
       <div
-        className="h-[100dvh] w-full flex items-end bg-cover bg-center bg-no-repeat"
+        className="h-[100dvh] w-full flex items-end bg-cover"
         style={{
           backgroundImage:
-            "url('https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/TIC%20Official/4%201.png?updatedAt=1761288663167')",
+            "url('https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Design%20House/82e78d144af04f280594a334c1dc1c109956c699.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
         }}
       >
         <div className="py-15 px-8 md:px-16 lg:px-14 max-w-4xl text-white">
@@ -110,14 +112,19 @@ const Hero = () => {
         {/* Top-right paragraph */}
         <div className="absolute top-15 right-15 max-w-xl tracking-tighter text-left text-black z-10 pl-4">
           <p ref={topTextRef} className="text-lg md:text-xl font-medium">
-            Eye-catching visuals for ads, websites, and product mockups. Artists use 3D tools to craft unique, collectible digital art. Visualize spaces before they're built. 3D environments for immersive shopping or brand experiences.
+            Eye-catching visuals for ads, websites, and product mockups. Artists
+            use 3D tools to craft unique, collectible digital art. Visualize
+            spaces before they're built. 3D environments for immersive shopping
+            or brand experiences.
           </p>
         </div>
 
         {/* Bottom-left paragraph */}
         <div className="absolute bottom-15 left-15 max-w-xl tracking-tighter text-left text-black z-10 pr-4">
           <p ref={bottomTextRef} className="text-lg md:text-xl font-medium">
-            Every website we create is designed with international UI/UX standards so that your brand looks credible across any audience, anywhere in the world.
+            Every website we create is designed with international UI/UX
+            standards so that your brand looks credible across any audience,
+            anywhere in the world.
           </p>
         </div>
       </div>

@@ -17,12 +17,13 @@ const Work = () => {
   }, []);
   const WorksList = [
     {
-      title: "Akwad\nUAE",
-      subtitle: "Brand Identity, Website",
-      image: "/akwadUae.svg",
-      url: "https://www.akwad.ae/en",
-      name: "Akwad UAE",
+      title: "Hashmint\n India",
+      subtitle: "3D Website & Photography",
+      video: "/transistion.mp4",
+      url: "https://hashmint.in/",
+      name: "Hashmint India",
     },
+
     {
       title: "Summr\n India",
       subtitle: "Branding & 3D Website",
@@ -38,12 +39,13 @@ const Work = () => {
       name: "BCF Cast Factory",
     },
     {
-      title: "Zaap\n Energy",
+      title: "Medium \nTurtles",
       subtitle: "Brand Identity, Web & App",
-      url: "https://zappenergy.in/",
-      video: "/zapvideo.webm",
-      name: "Zaap Energy",
+      image: "/works-13.svg",
+      url: "https://mediumturtle.com/",
+      name: "Medium Turtles",
     },
+
     {
       title: "Panchayat \nAmazon Prime",
       subtitle: "WebApp",
@@ -79,11 +81,11 @@ const Work = () => {
       name: "Staap Stories of Art",
     },
     {
-      title: "Hashmint\n India",
-      subtitle: "3D Website & Photography",
-      video: "/transistion.mp4",
-      url: "https://hashmint.in/",
-      name: "Hashmint India",
+      title: "Zaap\n Energy",
+      subtitle: "Brand Identity, Web & App",
+      url: "https://zappenergy.in/",
+      video: "/zapvideo.webm",
+      name: "Zaap Energy",
     },
     {
       title: "Techvenchure\n Dubai",
@@ -100,12 +102,13 @@ const Work = () => {
       name: "Future of Data",
     },
     {
-      title: "Medium \nTurtles",
-      subtitle: "Brand Identity, Web & App",
-      image: "/works-13.svg",
-      url: "https://mediumturtle.com/",
-      name: "Medium Turtles",
+      title: "Akwad\nUAE",
+      subtitle: "Brand Identity, Website",
+      image: "/akwadUae.svg",
+      url: "https://www.akwad.ae/en",
+      name: "Akwad UAE",
     },
+
     {
       title: "Maxclean\n India",
       subtitle: "UIUX & Web",
@@ -127,10 +130,12 @@ const Work = () => {
       name: "Lifestyle Investments",
     },
     {
-      title: "DSA\n Cancer\n Institute",
+      title: "Adwin\n Power & Battery",
       subtitle: "Brand Identity & Web",
-      video: "/dsa_project.webm",
-      name: "DSA Cancer Institute",
+      url: "https://www.adwinpower.com/",
+      image:
+        "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/works/AdwinBattery.png",
+      name: "Adwin Battery & Power",
     },
     {
       title: "Kondaas\n Solar Power",
@@ -143,7 +148,7 @@ const Work = () => {
       title: "Architecture",
       subtitle: "Brand Identity & Web",
       video: "/hissn.webm",
-      //  url: "https://tic-hissin-3vwm.vercel.app/",
+      // url: "https://tic-hissin-3vwm.vercel.app/",
       name: "Architecture",
     },
     {
@@ -178,7 +183,6 @@ const Work = () => {
         {WorksList.map((item, idx) => {
           // const parallaxOffset = scrollY * 15;
           return (
-            
             <div
               key={idx}
               className={`relative group  overflow-hidden rounded-xl lg:rounded-3xl sm:rounded-3xl transition-all duration-500  min-h-[390px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[620px] ${
@@ -197,9 +201,8 @@ const Work = () => {
               }  `}
             >
               <Link href={item.url ? item.url : "/"}>
-              <div className="absolute inset-0 overflow-hidden pointer-events-auto">
-                <div className="absolute inset-0">
-                  
+                <div className="absolute inset-0 overflow-hidden pointer-events-auto">
+                  <div className="absolute inset-0">
                     {item.image ? (
                       <Image
                         src={item.image}
@@ -220,23 +223,22 @@ const Work = () => {
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-100"
                       />
                     )}
-                  
+                  </div>
                 </div>
-              </div>
-              <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
-                <div>
-                  <p className="text-[32.45px]  lg:text-[43.5px] font-light text-white tracking-[-0.07em] max-w-[400px] whitespace-pre-line leading-[45px] sm:leading-[40px] md:leading-[50px]">
-                    {item.title}
-                  </p>
-                </div>
+                <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
+                  <div>
+                    <p className="text-[32.45px]  lg:text-[43.5px] font-light text-white tracking-[-0.07em] max-w-[400px] whitespace-pre-line leading-[45px] sm:leading-[40px] md:leading-[50px]">
+                      {item.title}
+                    </p>
+                  </div>
 
-                <div className="flex justify-start items-start">
-                  <h3 className="inline-flex items-start font-normal gap-2 px-1 sm:px-6 md:px-4 py-1 sm:py-2.5 md:py-3 bg-transparent  text-white  transition-all duration-300 tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
-                    {item.subtitle}
-                  </h3>
+                  <div className="flex justify-start items-start">
+                    <h3 className="inline-flex items-start font-normal gap-2 px-1 sm:px-6 md:px-4 py-1 sm:py-2.5 md:py-3 bg-transparent  text-white  transition-all duration-300 tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
+                      {item.subtitle}
+                    </h3>
+                  </div>
                 </div>
-              </div>
-                </Link>
+              </Link>
             </div>
           );
         })}

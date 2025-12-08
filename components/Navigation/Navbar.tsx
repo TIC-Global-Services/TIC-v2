@@ -493,12 +493,12 @@ const Navbar = () => {
       {/* Full Screen Overlay Menu */}
       <div
         ref={overlayRef}
-        className="fixed inset-0 bg-black z-45 opacity-0 invisible"
+        className="fixed inset-0 bg-black z-45 opacity-0 invisible max-h-screen"
         role="dialog"
         aria-modal="true"
         aria-labelledby="menu-title"
       >
-        <div className="md:h-full h-1/2 w-full flex md:flex-row flex-col items-start justify-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-48">
+        <div className="md:h-full h-1/2 w-full flex md:flex-row flex-col items-start justify-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-10 2xl:py-32">
           {/* Logo - Centered */}
           <div className="flex-1 flex items-start justify-start">
             <div ref={overlayLogoRef} className="flex-shrink-0">
@@ -522,19 +522,19 @@ const Navbar = () => {
               >
                 {FnavItems.map((item, index) => (
                   <div key={`overlay-nav-${index}`} className="relative">
-                    <a
+                    <Link
                       href={item.link}
                       onClick={handleLinkClick}
                       className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium tracking-tight text-white hover:text-gray-400 transition-colors"
                     >
                       {item.name === "Design House" ? (
                         <span className="block">
-                          Design <span className="block">House</span>
+                          Design House
                         </span>
                       ) : (
                         item.name
                       )}
-                    </a>
+                    </Link>
 
                     {item.name === "Client Portal" && (
                       <span className="absolute -top-1 -right-12 sm:-right-14 lg:-right-16 px-2 sm:px-3 py-1 text-xs hover:bg-[#4A5818] bg-[#c7e55b] text-black rounded">
@@ -553,7 +553,7 @@ const Navbar = () => {
             </div>
 
             {/* Social Links */}
-            <div ref={socialLinksRef} className="flex flex-col items-start">
+            <div ref={socialLinksRef} className="flex flex-col items-start pt-20">
               {[
                 {
                   href: "https://www.instagram.com/the.internetcompany",

@@ -31,12 +31,12 @@ const Contacts = () => {
                   <div key={index} className="pb-5 border-b border-black/50">
                     <div className="grid grid-cols-2 lg:grid-cols-3 items-center text-start">
                       
-                      <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal whitespace-pre-line text-black leading-[45.53px] tracking-[-1.23px]  lg:tracking-[-2.63px] ">
+                      <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal whitespace-pre-line text-black leading-[1] tracking-[-1.23px]  lg:tracking-[-2.63px] ">
                         {item.designation}
                       </h2>
                            
                       <h2 className="text-[20px] md:text-[38px] lg:text-[44px] font-normal text-black  tracking-tighter flex items-center gap-2">
-                        {item.name} <span> <img src={item.emoji} alt={item.name} className=" w-12 h-12" /></span>
+                        {item.name} <span> <img src={item.emoji} alt={item.name} className=" w-8 h-8 md:w-12 md:h-12" /></span>
                       </h2> 
                       <a
                         href={`mailto:${item.email}`}

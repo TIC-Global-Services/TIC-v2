@@ -98,6 +98,7 @@ const Projects = () => {
             ))}
           </div>
         </div>
+        
 
         {/* Custom Cursor */}
         {isHovering && (
