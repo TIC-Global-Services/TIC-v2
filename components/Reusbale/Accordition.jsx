@@ -44,7 +44,7 @@ const Accordition = ({ title, answer, serviceList, policy }) => {
             : "grid-rows-[0fr] opacity-0"
         }`}
       >
-        <div className="overflow-hidden lg:text-xl py-2">
+        <div className="overflow-hidden lg:text-xl py-2 text-black">
           <h1>{answer}</h1>
           {serviceList?.length > 0 && (
             <ul className="list-disc pl-6 space-y-3">

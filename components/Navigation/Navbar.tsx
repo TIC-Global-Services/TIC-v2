@@ -493,57 +493,48 @@ const Navbar = () => {
       {/* Full Screen Overlay Menu */}
       <div
         ref={overlayRef}
-        className="fixed inset-0 bg-black z-45 opacity-0 invisible max-h-screen"
+        className="fixed inset-0 bg-black z-50 opacity-0 invisible overflow-y-auto"
         role="dialog"
         aria-modal="true"
         aria-labelledby="menu-title"
       >
-        <div className="md:h-full h-1/2 w-full flex md:flex-row flex-col items-start justify-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-10 2xl:py-32">
-          {/* Logo - Centered */}
-          <div className="flex-1 flex items-start justify-start">
-            <div ref={overlayLogoRef} className="flex-shrink-0">
+        <div className="min-h-screen w-full flex flex-col  lg:justify-between gap-10 lg:flex-row px-4 sm:px-6 lg:px-8 py-6 md:py-12 relative">
+          {/* Logo */}
+          <div className=" flex justify-start md:mb-0">
+            <div ref={overlayLogoRef} className="flex-shrink-0 ">
               <a href="/" onClick={handleLinkClick}>
                 <img
                   src="https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/newLogo.png?updatedAt=1751867093209"
                   alt="The Internet Company Logo"
-                  className="h-20 sm:h-20 lg:h-30 w-auto"
+                  className="h-16 sm:h-20 lg:h-28 w-auto object-contain"
                 />
               </a>
             </div>
           </div>
 
-          {/* Right Side: Navigation and Social Links */}
-          <div className="flex flex-row items-start justify-between gap-40">
-            {/* Main Navigation */}
+          {/* Navigation + Social */}
+          <div className="w-full md:w-[40%] flex flex-col lg:flex-row items-start justify-between gap-12 md:gap-20">
+            {/* Menu Items */}
             <div ref={menuLinksRef}>
-              <nav
-                className="space-y-2 sm:space-y-3 lg:space-y-4 text-start"
-                id="menu-title"
-              >
+              <nav className="space-y-3 sm:space-y-4" id="menu-title">
                 {FnavItems.map((item, index) => (
-                  <div key={`overlay-nav-${index}`} className="relative">
+                  <div key={index} className="relative w-fit">
                     <Link
                       href={item.link}
                       onClick={handleLinkClick}
-                      className="block text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-medium tracking-tight text-white hover:text-gray-400 transition-colors"
+                      className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white hover:text-gray-400 transition"
                     >
-                      {item.name === "Design House" ? (
-                        <span className="block">
-                          Design House
-                        </span>
-                      ) : (
-                        item.name
-                      )}
+                      {item.name}
                     </Link>
 
+                    {/* Badges */}
                     {item.name === "Client Portal" && (
-                      <span className="absolute -top-1 -right-12 sm:-right-14 lg:-right-16 px-2 sm:px-3 py-1 text-xs hover:bg-[#4A5818] bg-[#c7e55b] text-black rounded">
+                      <span className="absolute -top-2 -right-10 sm:-right-12 lg:-right-14 px-2 py-1 text-xs bg-[#c7e55b] text-black rounded">
                         New
                       </span>
                     )}
-
                     {item.name === "Archive" && (
-                      <span className="absolute -top-1 -right-1 sm:-right-12 lg:right-1 px-2 py-1 text-xs bg-gray-700 text-white rounded">
+                      <span className="absolute -top-2 -right-8 sm:-right-10 lg:-right-12 px-2 py-1 text-xs bg-gray-700 text-white rounded">
                         36
                       </span>
                     )}
@@ -553,7 +544,10 @@ const Navbar = () => {
             </div>
 
             {/* Social Links */}
-            <div ref={socialLinksRef} className="flex flex-col items-start pt-20">
+            <div
+              ref={socialLinksRef}
+              className="flex flex-col items-start gap-2 pt-4 md:pt-20"
+            >
               {[
                 {
                   href: "https://www.instagram.com/the.internetcompany",
@@ -570,7 +564,7 @@ const Navbar = () => {
                   onClick={handleLinkClick}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm sm:text-base lg:text-3xl tracking-tighter text-white hover:text-[#595959] transition-colors"
+                  className="text-base sm:text-lg lg:text-3xl tracking-tight text-white hover:text-gray-500 transition"
                 >
                   {label}
                 </a>
@@ -580,7 +574,7 @@ const Navbar = () => {
 
           {/* Close Button */}
           <button
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition-colors z-50"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white flex items-center justify-center hover:bg-gray-200 transition"
             onClick={() => console.log("Close menu")}
             aria-label="Close menu"
           >
@@ -599,24 +593,23 @@ const Navbar = () => {
             </svg>
           </button>
 
-          {/* Copyright - Bottom Right */}
-          <div className="absolute bottom-7 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8">
-            <p className="text-xs sm:text-sm text-gray-500 text-right">
-              © Copyright TIC INTERNET COMPANY
-            </p>
-          </div>
-
-          {/* Contact Button - Bottom Left */}
-          <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8">
-            <Link href={"/contact"}>
+          {/* Bottom section */}
+          {/* <div className="absolute bottom-6 left-4 sm:left-6 flex flex-col gap-3">
+            <Link href="/contact">
               <button
                 onClick={handleLinkClick}
-                className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition-all text-sm sm:text-base"
+                className="px-6 py-3 border border-white text-white rounded-full hover:bg-white hover:text-black transition text-sm sm:text-base"
               >
-                contact
+                Contact
               </button>
             </Link>
           </div>
+
+          <div className="hidden md:absolute bottom-6 right-4 sm:right-6 text-right">
+            <p className="text-xs sm:text-sm text-gray-500">
+              © Copyright TIC INTERNET COMPANY
+            </p>
+          </div> */}
         </div>
       </div>
     </>

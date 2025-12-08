@@ -65,11 +65,11 @@ const Clientele = () => {
       <div className="flex flex-col lg:flex-row gap-10 xl:gap-20 lg:gap-20 md:gap-8 max-w-5xl">
         <InfoCard title="Background" items={location} />
         <InfoCard title="What we do" items={contact} />
-        <InfoCard title="Philosophy" items={socials} />9
+        <InfoCard title="Philosophy" items={socials} />
       </div>
 
       <div className="bg-black rounded-2xl p-10 ">
-        <h1 className="text-7xl tracking-tighter font-medium">Clientele</h1>
+        <h1 className="text-7xl tracking-tighter font-medium text-white">Clientele</h1>
         <p className="text-[#7B7B7B] mt-10 max-w-2xl">
           We're proud to collaborate with a diverse range of clients from bold
           startups to established brands each bringing unique ideas to the

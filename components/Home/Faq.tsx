@@ -97,7 +97,7 @@ const Faq = () => {
       <div className="flex flex-col mx-auto lg:max-w-8xl sm:max-w-full p-8 lg:p-15">
         <div>
           {faqList.map((faq, index) => (
-            <div key={index} className="p-1 lg:p-3">
+            <div key={index} className="p-1 lg:p-3 text-black">
               <Accordion title={faq.question} answer={faq.answer} serviceList={faq.services} policy={faq.policy} />
               {index !== faqList.length-1 && (
                 <div className="w-full h-px bg-white mt-6"></div>
