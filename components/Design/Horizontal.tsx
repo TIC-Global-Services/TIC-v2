@@ -44,9 +44,9 @@ const Horizontal: React.FC = () => {
       trigger: container,
       pin: true,
       scrub: 1,
-      end: () => `+=${scrollWidth}`,
+      start: 'top top',
+      end: () => `+=${scrollWidth + 1000}`,
       invalidateOnRefresh: true,
-      anticipatePin: 1,
       animation: gsap.to(sections, {
         x: () => -scrollWidth,
         ease: "none",

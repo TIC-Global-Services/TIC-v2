@@ -235,7 +235,7 @@ const Form = () => {
   const progress = showThankYou ? 100 : ((currentQuestion - 1) / 5) * 100;
 
   return (
-    <div className="min-h-screen w-full bg-black flex items-center justify-center p-5 md:p-10  text-white relative overflow-y-auto">
+    <div className="min-h-screen w-full bg-black flex items-center justify-center p-5 md:p-10  text-white relative overflow-y-hidden">
       <div className="w-full max-w-[700px]">
         {/* Question 1: Name */}
         {currentQuestion === 1 && !showThankYou && (
@@ -558,7 +558,7 @@ const Form = () => {
       </div>
 
       {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 w-full">
+      <div className="absolute top-0 left-0 w-full">
         <div className="w-full h-1 bg-white/20">
           <div
             className="h-full bg-white transition-all duration-500"

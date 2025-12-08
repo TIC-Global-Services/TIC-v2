@@ -9,12 +9,12 @@ import Link from "next/link";
 const Founder = () => {
   return (
     <div className="md:py-20 py-10 bg-[#F5F5F5] space-y-6">
-      <h1 className="text-3xl md:text-6xl text-center text-black font-medium">
+      <h1 className="text-3xl md:text-6xl text-center text-black font-normal tracking-tighter">
         Founder & Team
       </h1>
-      <section className="flex flex-col-reverse md:flex-row items-start justify-start md:gap-10  pt-10 rounded-2xl bg-white px-10">
+      <section className="flex flex-col-reverse md:flex-row items-center justify-center md:gap-10  rounded-2xl bg-white px-10">
         {/* === Left Section (Image + Title) === */}
-        <div className="w-full md:w-1/2">
+        <div className="w-full md:w-1/2 pt-10">
           <img src={FounderImage} alt="Founder" className="object-cover w-full" />
         </div>
 

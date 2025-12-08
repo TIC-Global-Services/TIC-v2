@@ -9,7 +9,7 @@ export const ClienteleData = [
   },
   {
     name: "Haus of chaos",
-    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/hoc.png?updatedAt=1759923781546",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/hoc.png",
   },
   {
     name: "Enclave",
@@ -145,7 +145,7 @@ export const ClienteleData = [
   },
   {
     name: "2.0",
-    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/2.webp?updatedAt=1759923781611",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/2.0.png",
   },
   {
     name: "Bankaru",
@@ -173,7 +173,7 @@ export const ClienteleData = [
   },
   {
     name: "Prime",
-    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/prime.webp?updatedAt=1759923781685",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/amazon-prime.png",
   },
   {
     name: "Spatial Grid",
@@ -181,7 +181,7 @@ export const ClienteleData = [
   },
   {
     name: "Savita",
-    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/summr.png?updatedAt=1759923781549",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/savita.png?updatedAt=1759923781976",
   },
   {
     name: "Canary",
@@ -209,7 +209,7 @@ export const ClienteleData = [
   },
   {
     name: "BCF",
-    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/bcf.png?updatedAt=1759923780761",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/bcf.png",
   },
   {
     name: "Akwad",
@@ -217,7 +217,7 @@ export const ClienteleData = [
   },
   {
     name: "Agasti",
-    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/Agasti_Logo.png",
+    img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Clientele/agasti.png",
   },
   {
     name: "Aauraa",

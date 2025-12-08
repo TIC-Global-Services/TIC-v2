@@ -43,10 +43,10 @@ const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(data.media);
           {/* Left Section - Fixed height */}
           <div className="flex flex-col justify-between  p-3 md:p-4 lg:p-6 w-full lg:w-1/2 h-1/2 lg:h-full">
             <div>
-              <h2 className="text-xl sm:text-2xl lg:text-5xl font-medium text-gray-900 tracking-tighter ">
+              <h2 className="text-xl sm:text-2xl lg:text-5xl font-normal text-gray-900 tracking-tighter ">
                 {data.name}
               </h2>
-              <p className="text-[#B7B7B7] text-sm lg:text-5xl  mt-1 tracking-tighter font-medium ">
+              <p className="text-[#B7B7B7] text-sm lg:text-5xl  mt-1 tracking-tighter font-normal ">
                 {data.work}
               </p>
             </div>
@@ -114,7 +114,7 @@ const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(data.media);
 const ArchiveCards = () => {
   return (
     <div className="flex flex-col xl:px-[38px] lg:px-[25px] md:px-5 gap-5 pb-10   bg-[#F5F5F5] min-h-screen">
-      <h1 className="text-7xl mt-[35vh] mb-30 text-black font-medium tracking-tighter ">
+      <h1 className="text-7xl mt-[35vh] mb-30 text-black font-normal tracking-tighter ">
         Archive<br />
         <span className="text-[#9F9F9F] tracking-tighter">Some goodies <br /> from our past</span>
       </h1>

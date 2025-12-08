@@ -116,7 +116,7 @@ export const ArchiveData = [
     type: "3D",
     web: "Web App",
     link: "https://www.himalayanutopia.com/",
-    media: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/archive/c4cca769-5a75-4e1a-9a59-909d9f61a8ee%201.png?updatedAt=1759828546031",
+    media: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Design%20House/HimalayanUtopia.png",
   },
 
   {

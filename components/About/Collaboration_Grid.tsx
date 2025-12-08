@@ -17,7 +17,7 @@ const CollaborationGrid = () => {
           />
         </div>
         <div className=" px-6 py-6 max-w-md">
-          <h1 className=" text-4xl text-black font-medium tracking-tighter">Colloboration is Key</h1>
+          <h1 className=" text-4xl text-black font-normal tracking-tighter">Colloboration is Key</h1>
           <p className=" text-gray-400 py-5">
             TIC was built on the belief that successful branding comes from a
             collaborative process. We work closely with our clients, ensuring
@@ -29,7 +29,7 @@ const CollaborationGrid = () => {
 
       <div  className=" bg-white rounded-xl flex flex-col justify-between items-end">
         <div className=" px-6 pt-6 max-w-md md:text-right">
-          <h1 className=" text-4xl text-black font-medium tracking-tighter">Not just a Brand</h1>
+          <h1 className=" text-4xl text-black font-normal tracking-tighter">Not just a Brand</h1>
           <p className=" text-gray-400 py-5  ">
             While logo, colours, and fonts are the entirety of their brand in
             some instances, it's often just a small part of what the audience

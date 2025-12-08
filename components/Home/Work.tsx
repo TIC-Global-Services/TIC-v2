@@ -1,11 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-const Work = () => {
+
+const Work: React.FC = () => {
   useEffect(() => {
+    // Video setup (unchanged)
     const videos = document.querySelectorAll("video");
-    videos.forEach((video) => {
+    videos?.forEach((video) => {
       video.load();
       video.muted = true;
       video.autoplay = true;
@@ -14,8 +16,30 @@ const Work = () => {
       video.setAttribute("playsinline", "");
       video.setAttribute("webkit-playsinline", "");
     });
+
+    // Parallax effect — smooth, performant, respects rounded corners
+    const handleScroll = () => {
+      const scrolled = window.scrollY + window.innerHeight / 2; // center-based trigger
+
+      document.querySelectorAll<HTMLElement>(".parallax-media").forEach((el) => {
+        const rect = el.getBoundingClientRect();
+        const cardCenter = rect.top + rect.height / 2 + window.scrollY;
+
+        // Distance from viewport center
+        const distance = scrolled - cardCenter;
+        const offset = distance * 0.12; // adjust speed here (0.12 = smooth & subtle)
+
+        el.style.transform = `translateY(${offset}px) scale(1.1)`; // slight scale to fill bleed
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // initial position
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-  const WorksList = [
+
+ const WorksList = [
     {
       title: "Hashmint\n India",
       subtitle: "3D Website & Photography",
@@ -160,89 +184,107 @@ const Work = () => {
     },
   ];
 
-  const [scrollY, setScrollY] = useState(0);
   return (
     <div className="p-3 lg:p-10">
       <div className="flex justify-between items-center">
-        <div className="col-span-1">
-          <p className=" font-normal text-[50px] lg:text-[80px] tracking-[-3.91px] lg:tracking-[-4.91px]">
+        <div>
+          <p className="font-normal text-[50px] lg:text-[80px] tracking-[-3.91px] lg:tracking-[-4.91px]">
             Works
           </p>
         </div>
         <div>
           <Image
-            src={"/DownArrow.svg"}
+            src="/DownArrow.svg"
             width={83}
             height={87}
             alt="Down Arrow"
-            className="w-10 h-10 lg:w-15 lg:h-15"
+            className="w-10 h-10 lg:w-[60px] lg:h-[60px]"
           />
         </div>
       </div>
-      <div className="grid lg:grid-cols-2 sm:grid-cols-1 mt-10  gap-5 md:gap-10 lg:gap-5">
+
+      <div className="grid lg:grid-cols-2 sm:grid-cols-1 mt-10 gap-5 md:gap-10 lg:gap-5">
         {WorksList.map((item, idx) => {
-          // const parallaxOffset = scrollY * 15;
+          const isWide =
+            [0, 3, 6, 9, 12, 15, 16, 19].includes(idx);
+
+          const cardClasses = `
+            relative group overflow-hidden
+            rounded-xl sm:rounded-2xl lg:rounded-3xl
+            transition-all duration-500
+            min-h-[390px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[620px]
+            ${isWide ? "lg:col-span-2" : ""}
+            ${idx === 2 ? "bg-[#141414]" : ""}
+          `;
+
+          const mediaContent = item.image ? (
+            <Image
+              src={item.image}
+              alt={item.name}
+              width={1200}
+              height={1200}
+              className="parallax-media absolute inset-0 w-full h-full object-cover"
+            />
+          ) : item.video ? (
+            <video
+              src={item.video}
+              muted
+              autoPlay
+              loop
+              playsInline
+              preload="auto"
+              className="parallax-media absolute inset-0 w-full h-full object-cover"
+            />
+          ) : null;
+
           return (
-            <div
-              key={idx}
-              className={`relative group  overflow-hidden rounded-xl lg:rounded-3xl sm:rounded-3xl transition-all duration-500  min-h-[390px] sm:min-h-[450px] md:min-h-[550px] lg:min-h-[620px] ${
-                idx == 0 ||
-                idx == 3 ||
-                idx == 6 ||
-                idx == 9 ||
-                idx == 12 ||
-                idx == 15 ||
-                idx == 16 ||
-                idx == 19
-                  ? "lg:col-span-2 sm:col-span-1"
-                  : idx == 2
-                  ? "bg-[#141414]"
-                  : " "
-              }  `}
-            >
-              <Link href={item.url ? item.url : "/"}>
-                <div className="absolute inset-0 overflow-hidden pointer-events-auto">
-                  <div className="absolute inset-0">
-                    {item.image ? (
-                      <Image
-                        src={item.image}
-                        alt={item.name}
-                        width={1000}
-                        height={1000}
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 "
-                      />
-                    ) : (
-                      <video
-                        src={item.video}
-                        controls
-                        autoPlay
-                        playsInline
-                        muted
-                        loop
-                        preload="auto"
-                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-100"
-                      />
-                    )}
-                  </div>
-                </div>
-                <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
-                  <div>
-                    <p className="text-[32.45px]  lg:text-[43.5px] font-light text-white tracking-[-0.07em] max-w-[400px] whitespace-pre-line leading-[45px] sm:leading-[40px] md:leading-[50px]">
-                      {item.title}
-                    </p>
+            <div key={idx} className={cardClasses}>
+              {item.url ? (
+                <Link href={item.url} target="_blank" className="block h-full">
+                  {/* Background Media with Parallax */}
+                  <div className="absolute inset-0 overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl">
+                    {mediaContent}
                   </div>
 
-                  <div className="flex justify-start items-start">
-                    <h3 className="inline-flex items-start font-normal gap-2 px-1 sm:px-6 md:px-4 py-1 sm:py-2.5 md:py-3 bg-transparent  text-white  transition-all duration-300 tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px]">
+                  {/* Overlay Content */}
+                  <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8">
+                    <p className="text-[32.45px] lg:text-[43.5px] font-light text-white tracking-[-0.07em] max-w-[400px] whitespace-pre-line leading-[45px] sm:leading-[50px] md:leading-[60px]">
+                      {item.title}
+                    </p>
+
+                    <h3 className="font-normal text-white tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px] px-1 sm:px-6 py-2">
                       {item.subtitle}
                     </h3>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              ) : (
+                <>
+                  <div className="absolute inset-0 overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl">
+                    {mediaContent}
+                  </div>
+
+                  <div className="relative z-10 h-full flex flex-col justify-between p-5 sm:p-6 md:p-8 pointer-events-none">
+                    <p className="text-[32.45px] lg:text-[43.5px] font-light text-white tracking-[-0.07em] max-w-[400px] whitespace-pre-line leading-[45px] sm:leading-[50px] md:leading-[60px]">
+                      {item.title}
+                    </p>
+                    <h3 className="font-normal text-white tracking-tight text-base sm:text-lg md:text-xl lg:text-2xl xl:text-[28px] px-1 sm:px-6 py-2">
+                      {item.subtitle}
+                    </h3>
+                  </div>
+                </>
+              )}
             </div>
           );
         })}
       </div>
+
+      {/* Optional: CSS for smoother parallax */}
+      <style jsx>{`
+        .parallax-media {
+          will-change: transform;
+          transition: transform 0.1s ease-out;
+        }
+      `}</style>
     </div>
   );
 };

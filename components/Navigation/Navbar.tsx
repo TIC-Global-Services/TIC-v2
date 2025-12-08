@@ -12,7 +12,7 @@ import { usePathname } from "next/navigation";
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
 
-// Navigation items - easy to modify
+// Navigation items
 const navItems = [
   { name: "About", link: "/about" },
   {
@@ -444,9 +444,16 @@ const Navbar = () => {
                     className={`
     text-[14.9px] md:text-[13.5px] font-normal whitespace-nowrap transition-colors duration-300
     ${
-      index === activeIndex || index === hoveredIndex
+      // ✔ Hover wins
+      index === hoveredIndex
         ? "text-white"
-        : isWhiteBg
+        : // ✔ Active item (but only white when highlight stays under it)
+        index === activeIndex
+        ? hoveredIndex === null
+          ? "text-white" // active + NO hover → keep white
+          : "text-black" // active + hover on other item → turn black
+        : // ✔ Default (non-hover, non-active)
+        isWhiteBg
         ? "text-black"
         : "text-white/70"
     }
