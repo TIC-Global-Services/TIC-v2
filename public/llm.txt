@@ -1,0 +1,49 @@
+# LLM Indexing Policy for The Internet Company
+# Website: https://www.theinternetcompany.one
+# Purpose: Define how AI models may access and use publicly available website content.
+
+# ================================
+# Allowed Content
+# ================================
+allow: /
+allow: /about
+allow: /branding
+allow: /design-house
+allow: /archive
+allow: /client
+allow: /contact
+
+# Public-facing content may be indexed by AI systems for:
+# - Search and retrieval
+# - Summaries
+# - Knowledge extraction
+# - Navigation and answer generation
+
+
+- [Project Archive](https://theinternetcompany/archive): Showcase past projects and collaborations of The Internet Company with links to their websites.
+- [Brand Strategy Services](https://theinternetcompany/branding): Showcase brand strategy services to create memorable and powerful brand identities and voices.
+- [Client Onboarding](https://theinternetcompany/client): To onboard and connect with potential clients for personalized project collaborations.
+- [Design House Services](https://theinternetcompany/design-house): Showcase The Internet Company's design house services creating bold, strategic, and modern brand visuals and identities.
+- [About TIC Global Services](https://theinternetcompany/about): Showcase TIC Global Services' brand design expertise, team, philosophy, and client collaboration approach.
+- [TIC Web Branding House](https://theinternetcompany): Showcase TIC Global Services' web branding, design, development, and digital marketing solutions with portfolio and FAQs.
+- [Contact and Collaboration](https://theinternetcompany/contact): Provide contact information and collaboration opportunities for The Internet Company.
+
+
+# Sensitive areas must NOT be indexed, stored, or used for:
+# - Model training
+# - Dataset building
+# - Behavioral analysis
+# - Access pattern tracking
+
+# ================================
+# Intellectual Property Notice
+# ================================
+# All visual assets, branding elements, and creative works
+# on this site are the intellectual property of
+# The Internet Company (TIC Global Services).
+# They may NOT be used for training AI models unless
+# explicit written permission is granted.
+
+copyright: The Internet Company (TIC Global Services)
+contact: dev@theinternetcompany.one
+last-updated: 2025-12-09

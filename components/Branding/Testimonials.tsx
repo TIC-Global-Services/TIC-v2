@@ -19,50 +19,56 @@ const Testimonials = () => {
       name: "Brett",
       username: "@thebrett",
       review:
-        "I like this a lot. This is the best thing since sliced bread. I like this a lot. Signed up!",
+        "The Internet Company elevated our brand presence with clarity and precision. A truly refined experience.",
     },
     {
       image: Client2,
       name: "Alex Prokhorov",
       username: "@alex_pro_dsg",
-      review: "Stunning. I can finally make this link in bio website haha",
+      review:
+        "A beautifully crafted branding approach. Their design language brought our vision to life effortlessly.",
     },
     {
       image: Client3,
       name: "Hewar",
       username: "@hewarsaber",
-      review: "If Linktree had taste, itd look like this🔥",
+      review:
+        "Exceptional attention to detail. Our digital identity finally feels modern, intentional, and on-brand.",
     },
     {
       image: Client4,
       name: "Lamaan",
       username: "@lamaandesign",
       review:
-        "Love the work on this one. Waitlisted and excited to see where it goes!",
+        "The team understood our direction instantly. A smooth process and outstanding creative output.",
     },
     {
       image: Client5,
       name: "Chinaa",
       username: "@chinwechinaa",
-      review: "this is so good🥹❤️💯",
+      review:
+        "Clean, contemporary, and beautifully executed. Exactly what we wanted for our brand identity.",
     },
     {
       image: Client6,
       name: "Jagdev Soni",
       username: "@SoniJagdev",
-      review: "Visually popsite looks better",
+      review:
+        "They reimagined our visual system with a fresh, modern perspective. The result feels premium and intentional.",
     },
     {
       image: Client7,
       name: "Brian",
       username: "@iambrianoconnor",
-      review: "Its sooooo good",
+      review:
+        "A seamless branding experience. The Internet Company delivers creativity with real strategic depth.",
     },
     {
       image: Client8,
       name: "ӓli",
       username: "@aaalixyz",
-      review: "Let me innnnnnnn",
+      review:
+        "Impressed with their process and the final outcome. Our brand feels significantly more polished and cohesive.",
     },
   ];
 
