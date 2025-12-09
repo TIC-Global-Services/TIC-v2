@@ -39,7 +39,7 @@ const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(data.media);
         rel="noopener noreferrer"
         className="block"
       >
-        <div className="relative flex flex-col-reverse lg:flex-row bg-white rounded-2xl  overflow-hidden transition-all  duration-300 ease-out group h-[500px] md:h-[500px] lg:h-[400px] xl:h-[300px]">
+        <div className="relative flex flex-col-reverse lg:flex-row bg-white rounded-2xl  overflow-hidden transition-all  duration-300 ease-out group h-[300px] md:h-[500px] lg:h-[400px] xl:h-[300px]">
           {/* Left Section - Fixed height */}
           <div className="flex flex-col justify-between  p-3 md:p-4 lg:p-6 w-full lg:w-1/2 h-1/2 lg:h-full">
             <div>
@@ -66,7 +66,6 @@ const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(data.media);
             </div>
           </div>
 
-          {/* Right Section - Fixed container with parallax content */}
           {/* Right Section - Fixed container with parallax content */}
           <div className="w-full lg:w-1/2 h-1/2 lg:h-full p-3 md:p-4 lg:p-6">
             <div className="relative w-full h-full overflow-hidden rounded-2xl bg-gray-100">
@@ -113,8 +112,8 @@ const isVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(data.media);
 
 const ArchiveCards = () => {
   return (
-    <div className="flex flex-col xl:px-[38px] lg:px-[25px] md:px-5 gap-5 pb-10   bg-[#F5F5F5] min-h-screen">
-      <h1 className="text-7xl mt-[35vh] mb-30 text-black font-normal tracking-tighter ">
+    <div className="flex flex-col xl:px-[38px] lg:px-[25px] px-5 gap-5 pb-10   bg-[#F5F5F5] min-h-screen">
+      <h1 className=" text-6xl md:text-7xl mt-[35vh] mb-30 text-black font-normal tracking-tighter ">
         Archive<br />
         <span className="text-[#9F9F9F] tracking-tighter">Some goodies <br /> from our past</span>
       </h1>

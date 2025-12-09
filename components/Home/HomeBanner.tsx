@@ -133,7 +133,9 @@ const HomeBanner = () => {
     return () => {
       window.removeEventListener("resize", checkScreen);
       window.removeEventListener("resize", resizeCanvas);
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ScrollTrigger.getAll()
+        .filter((t) => t.vars.trigger === sectionRef.current)
+        .forEach((t) => t.kill());
     };
   }, []);
 

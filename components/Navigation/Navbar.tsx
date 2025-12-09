@@ -243,6 +243,7 @@ const Navbar = () => {
         stagger: 0.05,
       });
     }
+  
 
     // Collapse overlay
     gsap.to(overlayRef.current, {
@@ -480,7 +481,7 @@ const Navbar = () => {
         onMouseEnter={handleHoverEnter}
         onMouseLeave={handleHoverLeave}
         className="fixed top-4 right-4 sm:top-5 sm:right-5 lg:top-7 lg:right-6 z-100 w-12 h-12 sm:w-14 sm:h-14 lg:w-17 lg:h-17 bg-white cursor-pointer rounded-full flex items-center justify-center shadow-md transition-all duration-300 group
-  lg:hover:bg-black lg:hover:scale-105 lg:hover:shadow-lg"
+  lg:hover:bg-black lg:hover:scale-105 "
         style={{ opacity: 0 }}
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
       >
@@ -488,7 +489,7 @@ const Navbar = () => {
           ref={plusIconRef}
           className="transition-transform duration-300 ease-out"
         >
-          <HiPlus className="w-5 h-5 sm:w-6 sm:h-6 lg:w-10 lg:h-10 text-black group-hover:text-white transition-colors duration-300" />
+          <HiPlus className="w-5 h-5 sm:w-6 sm:h-6 lg:w-10 lg:h-10 text-black lg:group-hover:text-white transition-colors duration-300" />
         </div>
       </button>
 
