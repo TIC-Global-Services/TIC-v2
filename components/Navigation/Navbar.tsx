@@ -76,10 +76,9 @@ const Navbar = () => {
     pathname === "/contact" ||
     pathname === "/archive" ||
     pathname === "/about" ||
-    // pathname === "/design-house" ||
     pathname === "/";
 
-  const isClient = pathname === "/client" || pathname === '/design-house' || pathname === "/branding";
+  const isClient = pathname === "/client" || pathname === '/design-house' || pathname === "/branding" ;
 
   useEffect(() => {
     (async function () {
@@ -374,7 +373,7 @@ const Navbar = () => {
         ref={navbarRef}
         className="fixed top-0 left-0 right-0 z-40 bg-transparent"
       >
-        <Container className="flex items-center justify-between lg:p-10 py-4 sm:py-6 lg:py-8">
+        <Container className="flex items-center justify-between  py-4 sm:py-6 lg:py-8">
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/">
@@ -384,15 +383,11 @@ const Navbar = () => {
                 //     ? "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/tic%20(3)%201.png?updatedAt=1759839855964"
                 //     : "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/newLogo.png?updatedAt=1751867093209"
                 // }
-                src={!isClient ? "/tic_logo.svg" : "/tic_logo_white.png"}
+                src={!isClient ? "/tic_logo.svg" : "/logo_white.png"}
                 alt="The Internet Company Logo"
                 width={200}
                 height={100}
-                className={
-                  !isClient
-                    ? "h-15 sm:h-19 lg:h-20 w-auto"
-                    : "h-15 sm:h-19 lg:h-30 w-auto"
-                }
+                className=" w-14 h-14"
                 priority
               />
             </Link>
