@@ -5,6 +5,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { MoveRight } from "lucide-react";
+import { getCalApi } from "@calcom/embed-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +21,13 @@ const HomeBanner = () => {
   const [progress, setProgress] = useState(0);
   const [isLoaderDone, setIsLoaderDone] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    (async function () {
+      const cal = await getCalApi({ namespace: "discovery-call" });
+      cal("ui", { hideEventTypeDetails: false, layout: "column_view" });
+    })();
+  }, []);
 
   useEffect(() => {
     let images: HTMLImageElement[] = [];
@@ -167,13 +175,15 @@ const HomeBanner = () => {
             audiences interact with brands online.
           </p>
 
-          <Link
-            href="#"
+          <button
+            data-cal-namespace="discovery-call"
+            data-cal-link="theinternetcompany/discovery-call"
+            data-cal-config='{"layout":"column_view"}'
             className="bg-white text-black px-5 py-3 rounded-[15.32px] flex items-center"
           >
             Book a Call
             <MoveRight />
-          </Link>
+          </button>
         </div>
 
         {/* KEEP SCROLLING */}
