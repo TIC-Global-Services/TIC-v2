@@ -2,7 +2,6 @@ import Clientele from "@/components/About/Clientele";
 import CollaborationGrid from "@/components/About/Collaboration_Grid";
 import Founder from "@/components/About/Founder";
 import Hero from "@/components/About/Hero";
-import Team from "@/components/About/Team";
 import Container from "@/components/Reusbale/Container";
 import React from "react";
 
