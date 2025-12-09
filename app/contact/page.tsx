@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "The Internet Company",
     images: [
       {
-        url: "/open-graph/Contcat.png",
+        url: "/open-graph/Contact.png",
         width: 1200,
         height: 630,
         alt: "Contact – The Internet Company",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     title: "Contact – The Internet Company",
     description:
       "Connect with our team to begin your next digital or branding project.",
-    images: ["/open-graph/Contcat.png"],
+    images: ["/open-graph/Contact.png"],
   },
 };
 
