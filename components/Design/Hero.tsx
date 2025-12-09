@@ -120,8 +120,8 @@ const Hero = () => {
         </div>
 
         {/* Bottom-left paragraph */}
-        <div className="absolute bottom-15 left-15 max-w-xl tracking-tighter text-left text-black z-10 pr-4">
-          <p ref={bottomTextRef} className="text-lg md:text-xl font-normal">
+        <div className="absolute bottom-15 left-15 max-w-[589px] tracking-tighter text-left text-black z-10 pr-4">
+          <p ref={bottomTextRef} className="text-lg md:text-xl font-normal text-justify">
             Every website we create is designed with international UI/UX
             standards so that your brand looks credible across any audience,
             anywhere in the world.

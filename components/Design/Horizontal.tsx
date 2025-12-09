@@ -15,9 +15,16 @@ const Horizontal: React.FC = () => {
   const scrollTriggerRef = useRef<ScrollTrigger | null>(null);
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [hasMoved, setHasMoved] = useState(false);
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    setHasMoved(true);
     setCursorPos({ x: e.clientX, y: e.clientY });
+  };
+
+  const defaultCenter = {
+    x: typeof window !== "undefined" ? window.innerWidth / 2 : 0,
+    y: typeof window !== "undefined" ? window.innerHeight / 2 : 0,
   };
 
   const handleClick = () => {
@@ -44,7 +51,7 @@ const Horizontal: React.FC = () => {
       trigger: container,
       pin: true,
       scrub: 1,
-      start: 'top top',
+      start: "top top",
       end: () => `+=${scrollWidth + 1000}`,
       invalidateOnRefresh: true,
       animation: gsap.to(sections, {
@@ -99,8 +106,8 @@ const Horizontal: React.FC = () => {
           <div
             className="fixed pointer-events-none z-50 transition-opacity duration-200 flex items-center gap-3"
             style={{
-              left: `${cursorPos.x}px`,
-              top: `${cursorPos.y}px`,
+              left: `${hasMoved ? cursorPos.x : defaultCenter.x}px`,
+              top: `${hasMoved ? cursorPos.y : defaultCenter.y}px`,
               transform: "translate(-50%, -50%)",
             }}
           >
@@ -116,6 +123,7 @@ const Horizontal: React.FC = () => {
             </div>
           </div>
         )}
+
         <div ref={sectionsRef} className="flex h-full w-max">
           <section
             style={{
