@@ -111,7 +111,7 @@ const Horizontal: React.FC = () => {
             </div>
 
             {/* Text beside circle */}
-            <div className="text-black text-2xl font-medium whitespace-nowrap">
+            <div className="text-black text-2xl font-normal whitespace-nowrap">
               click to view brandbook
             </div>
           </div>

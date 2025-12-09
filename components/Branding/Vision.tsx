@@ -112,12 +112,12 @@ const Vision = () => {
       </div>
 
       {/* Title */}
-      <h1 className="font-medium md:text-[64px] text-[36px] text-[#171717] tracking-tighter md:leading-[72px] leading-[42px] max-w-4xl mx-auto text-center">
+      <h1 className="font-normal md:text-[64px] text-[36px] text-[#171717] tracking-tighter md:leading-[72px] leading-[42px] max-w-4xl mx-auto text-center">
         Your Vision, Our Craft
       </h1>
 
       {/* Subtitle */}
-      <p className="font-medium text-[14px] md:text-[16px] leading-[22px] text-[#171717] md:tracking-[-0.4px] max-w-md mx-auto text-center mt-4 mb-8">
+      <p className="font-normal text-[14px] md:text-[16px] leading-[22px] text-[#171717] md:tracking-[-0.4px] max-w-md mx-auto text-center mt-4 mb-8">
         Every great brand starts with a story. We turn yours into a legacy.
       </p>
 
@@ -168,7 +168,7 @@ const Vision = () => {
         {contents.map((item, index) => (
           <div
             key={index}
-            className="border border-[#2222221A] rounded-[10px] p-6 flex flex-col items-start text-start bg-white hover:shadow-lg transition"
+            className="border border-[#2222221A] rounded-[10px] p-6 flex flex-col items-start text-start bg-white hover:scale-105 transition"
           >
             <Image
               src={item.icon}

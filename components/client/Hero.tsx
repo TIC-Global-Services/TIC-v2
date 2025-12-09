@@ -8,7 +8,7 @@ const Hero = () => {
 <div className='flex h-[100dvh] bg-black items-center justify-center text-center'>
     <Container>
       <div>
-        <h1 className='text-4xl sm:text-5xl md:text-[60px] lg:text-[80px] leading-snug sm:leading-tight md:leading-[80px] lg:leading-[92px] max-w-5xl text-white font-medium tracking-tighter mx-auto'>
+        <h1 className='text-4xl sm:text-5xl md:text-[60px] lg:text-[80px] leading-snug sm:leading-tight md:leading-[80px] lg:leading-[92px] max-w-5xl text-white font-normal tracking-tighter mx-auto'>
           Welcome, We Onboard <br />
           <span className='text-[#1773FF]'>2</span> Projects a Month
         </h1>
@@ -27,7 +27,7 @@ const Hero = () => {
           </div>
 
           {/* Static Text */}
-          <span className="font-semibold text-white/50 whitespace-nowrap leading-none">
+          <span className="font-normal text-white/50 whitespace-nowrap leading-tight tracking-tight">
             Scroll down to connect with us
           </span>
         </div>

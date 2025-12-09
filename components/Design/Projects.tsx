@@ -58,7 +58,7 @@ const Projects = () => {
 
   return (
     <div className="bg-white min-h-[100dvh] w-full pt-20 flex flex-col items-center justify-center">
-      <h1 className="text-black text-6xl md:text-8xl text-center font-medium tracking-tighter mb-16">
+      <h1 className="text-black text-6xl md:text-8xl text-center font-normal tracking-tighter mb-16">
         Projects
       </h1>
 
@@ -117,7 +117,7 @@ const Projects = () => {
             </div>
 
             {/* Text beside circle */}
-            <div className="text-white text-2xl font-medium whitespace-nowrap">
+            <div className="text-white text-2xl font-normal whitespace-nowrap">
               click to view brandbook
             </div>
           </div>

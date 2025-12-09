@@ -69,7 +69,7 @@ const Clientele = () => {
       </div>
 
       <div className="bg-black rounded-2xl p-10 ">
-        <h1 className="text-7xl tracking-tighter font-medium text-white">Clientele</h1>
+        <h1 className="text-7xl tracking-tighter font-normal text-white">Clientele</h1>
         <p className="text-[#7B7B7B] mt-10 max-w-2xl">
           We're proud to collaborate with a diverse range of clients from bold
           startups to established brands each bringing unique ideas to the

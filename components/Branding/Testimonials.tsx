@@ -88,7 +88,7 @@ const Testimonials = () => {
             className="w-12 h-12 rounded-full object-cover"
           />
           <div className="flex flex-col">
-            <span className="font-medium text-[16px] leading-[24px] tracking-[-0.4px] text-white">
+            <span className="font-normal text-[16px] leading-[24px] tracking-[-0.4px] text-white">
               {name}
             </span>
             <span className="font-normal text-[14px] leading-[20px] tracking-[-0.4px] text-gray-500">

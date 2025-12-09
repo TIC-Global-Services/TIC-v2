@@ -240,7 +240,7 @@ const Form = () => {
         {/* Question 1: Name */}
         {currentQuestion === 1 && !showThankYou && (
           <div className="opacity-100 transform translate-y-0 transition-all duration-400">
-            <h2 className="text-[28px] font-medium mb-5 tracking-tight">
+            <h2 className="text-[28px] font-normal mb-5 tracking-tight">
               What is your name?*
             </h2>
             <div className="relative mb-10">
@@ -264,7 +264,7 @@ const Form = () => {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => validateAndProceed(1)}
-                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-medium cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all"
+                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-normal cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all"
               >
                 OK
               </button>
@@ -279,7 +279,7 @@ const Form = () => {
             <div className="mb-12">
               <button
                 onClick={() => setCurrentQuestion(1)}
-                className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-medium cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
+                className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-normal cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
               >
                 <svg
                   className="w-6 h-6"
@@ -296,7 +296,7 @@ const Form = () => {
                 </svg>
               </button>
             </div>
-            <h2 className="text-[28px] font-medium mb-5 tracking-tight">
+            <h2 className="text-[28px] font-normal mb-5 tracking-tight">
               What's your email address?
             </h2>
             <div className="relative mb-10">
@@ -320,7 +320,7 @@ const Form = () => {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => validateAndProceed(2)}
-                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-medium cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all"
+                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-normal cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all"
               >
                 OK
               </button>
@@ -335,7 +335,7 @@ const Form = () => {
             <div className="mb-12">
               <button
                 onClick={() => setCurrentQuestion(2)}
-                className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-medium cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
+                className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-normal cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
               >
                 <svg
                   className="w-6 h-6"
@@ -352,7 +352,7 @@ const Form = () => {
                 </svg>
               </button>
             </div>
-            <h2 className="text-[28px] font-medium mb-5 tracking-tight">
+            <h2 className="text-[28px] font-normal mb-5 tracking-tight">
               What's your phone number?
             </h2>
             <div className="relative mb-10">
@@ -376,7 +376,7 @@ const Form = () => {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => validateAndProceed(3)}
-                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-medium cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all"
+                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-normal cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all"
               >
                 OK
               </button>
@@ -391,7 +391,7 @@ const Form = () => {
             <div className="mb-12">
               <button
                 onClick={() => setCurrentQuestion(3)}
-                className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-medium cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
+                className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-normal cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
               >
                 <svg
                   className="w-6 h-6"
@@ -408,7 +408,7 @@ const Form = () => {
                 </svg>
               </button>
             </div>
-            <h2 className="text-[28px] font-medium mb-5 tracking-tight">
+            <h2 className="text-[28px] font-normal mb-5 tracking-tight">
               What service do you require?
             </h2>
             <div className="mb-8">
@@ -450,7 +450,7 @@ const Form = () => {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => validateAndProceed(4)}
-                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-medium cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all"
+                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-normal cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all"
               >
                 OK
               </button>
@@ -464,7 +464,7 @@ const Form = () => {
             <div className="mb-12">
               <button
                 onClick={() => setCurrentQuestion(4)}
-                className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-medium cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
+                className="bg-white text-black px-2.5 py-1.5 rounded-full text-base font-normal cursor-pointer hover:bg-white/90 transition-all flex items-center gap-1"
               >
                 <svg
                   className="w-6 h-6"
@@ -481,7 +481,7 @@ const Form = () => {
                 </svg>
               </button>
             </div>
-            <h2 className="text-[28px] font-medium mb-5 tracking-tight">
+            <h2 className="text-[28px] font-normal mb-5 tracking-tight">
               What category does your business fall under?
             </h2>
             <div className="relative mb-10">
@@ -532,7 +532,7 @@ const Form = () => {
               <button
                 onClick={handleSubmit}
                 disabled={isSubmitting}
-                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-medium cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all disabled:opacity-50"
+                className="bg-white text-black px-5 py-2.5 rounded-full text-base font-normal cursor-pointer hover:translate-y-[-2px] hover:shadow-lg transition-all disabled:opacity-50"
               >
                 {isSubmitting ? "Submitting..." : "OK"}
               </button>
@@ -559,7 +559,7 @@ const Form = () => {
 
       {/* Progress Bar */}
       <div className="absolute top-0 left-0 w-full">
-        <div className="w-full h-1 bg-white/20">
+        <div className="w-full h-1 bg-white/0">
           <div
             className="h-full bg-white transition-all duration-500"
             style={{ width: `${progress}%` }}

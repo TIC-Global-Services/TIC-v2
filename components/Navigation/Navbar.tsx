@@ -25,7 +25,7 @@ const navItems = [
   },
   {
     name: "Your Brand",
-    link: "http://branding.theinternetcompany.one/",
+    link: "/branding",
   },
   { name: "Archive", link: "/archive" },
   { name: "Contact", link: "/contact" },
@@ -37,7 +37,7 @@ const FnavItems = [
   { name: "About", link: "/about" },
   {
     name: "Design House",
-    link: "/about",
+    link: "/design-house",
   },
   {
     name: "Client Portal",
@@ -45,7 +45,7 @@ const FnavItems = [
   },
   {
     name: "Your Brand",
-    link: "http://branding.theinternetcompany.one/",
+    link: "/branding",
   },
   { name: "Archive", link: "/archive" },
   { name: "Contact", link: "/contact" },
@@ -76,9 +76,10 @@ const Navbar = () => {
     pathname === "/contact" ||
     pathname === "/archive" ||
     pathname === "/about" ||
+    // pathname === "/design-house" ||
     pathname === "/";
 
-  const isClient = pathname === "/client";
+  const isClient = pathname === "/client" || pathname === '/design-house' || pathname === "/branding";
 
   useEffect(() => {
     (async function () {
@@ -403,7 +404,7 @@ const Navbar = () => {
               <Link
                 key={`nav-${index}`}
                 href={item.link}
-                className={`text-base xl:text-[19px] font-medium transition-colors duration-300 relative group ${
+                className={`text-base xl:text-[19px] font-normal transition-colors duration-300 relative group ${
                   isWhiteBg
                     ? "text-black hover:text-gray-700"
                     : "text-white hover:text-gray-300"
@@ -444,14 +445,13 @@ const Navbar = () => {
                     className={`
     text-[14.9px] md:text-[13.5px] font-normal whitespace-nowrap transition-colors duration-300
     ${
-      // ✔ Hover wins
       index === hoveredIndex
         ? "text-white"
         : // ✔ Active item (but only white when highlight stays under it)
         index === activeIndex
         ? hoveredIndex === null
           ? "text-white" // active + NO hover → keep white
-          : "text-black" // active + hover on other item → turn black
+          : " text-black" // active + hover on other item → turn black
         : // ✔ Default (non-hover, non-active)
         isWhiteBg
         ? "text-black"
@@ -484,7 +484,7 @@ const Navbar = () => {
         onClick={toggleMenu}
         onMouseEnter={handleHoverEnter}
         onMouseLeave={handleHoverLeave}
-        className="fixed top-4 right-4 sm:top-5 sm:right-5 lg:top-7 lg:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 lg:w-17 lg:h-17 bg-white cursor-pointer rounded-full flex items-center justify-center shadow-md transition-all duration-300 group
+        className="fixed top-4 right-4 sm:top-5 sm:right-5 lg:top-7 lg:right-6 z-100 w-12 h-12 sm:w-14 sm:h-14 lg:w-17 lg:h-17 bg-white cursor-pointer rounded-full flex items-center justify-center shadow-md transition-all duration-300 group
   lg:hover:bg-black lg:hover:scale-105 lg:hover:shadow-lg"
         style={{ opacity: 0 }}
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -529,7 +529,7 @@ const Navbar = () => {
                     <Link
                       href={item.link}
                       onClick={handleLinkClick}
-                      className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-medium tracking-tight text-white hover:text-gray-400 transition"
+                      className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-normal tracking-tight text-white hover:text-gray-400 transition"
                     >
                       {item.name}
                     </Link>

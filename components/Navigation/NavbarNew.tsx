@@ -96,7 +96,7 @@ const NavbarNew = () => {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <div className='px-4 py-2 text-center'>
-                  <span className='text-sm md:text-[13.5px] font-medium text-white whitespace-nowrap'>
+                  <span className='text-sm md:text-[13.5px] font-normal text-white whitespace-nowrap'>
                     {item.name}
                   </span>
                 </div>

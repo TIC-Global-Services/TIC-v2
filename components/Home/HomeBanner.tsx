@@ -10,100 +10,96 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HomeBanner = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const sectionRef = useRef<HTMLElement | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const totalFrames = 150;
-  // const isMobile = window.innerWidth < 768;
-  const currentFrame = (index: number) =>
-   `/door/${(index + 1).toString().padStart(5, "0")}.avif`;
+  const contextRef = useRef<CanvasRenderingContext2D | null>(null);
 
-  const images: HTMLImageElement[] = [];
-  const imgSeq = { frame: 0 };
+  const totalFrames = 150;
+  const currentFrame = (i: number) =>
+    `/door/${(i + 1).toString().padStart(5, "0")}.avif`;
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const images: HTMLImageElement[] = []; // local cache for this render
-    const imgSeq = { frame: 0 };
+    let images: HTMLImageElement[] = [];
+    let imgSeq = { frame: 0 };
+    let ctx: CanvasRenderingContext2D | null = null;
 
     const checkScreen = () => setIsMobile(window.innerWidth < 768);
     checkScreen();
-
     window.addEventListener("resize", checkScreen);
 
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const context = canvas.getContext("2d");
-    if (!context) return;
-    contextRef.current = context;
 
-    // Preload all images and cache
-    for (let i = 0; i < totalFrames; i++) {
-      const img = new Image();
-      img.src = currentFrame(i);
-      images.push(img);
-    }
+    ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    contextRef.current = ctx;
 
-    // Return promise that resolves when all images are loaded once from cache or new
-    const loadImages = () =>
-      Promise.all(
-        images.map(
-          (img) =>
-            new Promise<void>((resolve) => {
-              if (img.complete) {
-                resolve();
-              } else {
-                img.onload = () => resolve();
-                img.onerror = () => resolve(); // handle load errors gracefully
-              }
-            })
-        )
-      );
+    /** -------------------------
+     * Full Page LOADER
+     --------------------------*/
+    const preloadImages = (): Promise<void> => {
+      return new Promise((resolve) => {
+        let loaded = 0;
+
+        for (let i = 0; i < totalFrames; i++) {
+          const img = new Image();
+          img.src = currentFrame(i);
+
+          img.onload = () => {
+            loaded++;
+            if (loaded === totalFrames) resolve();
+          };
+
+          img.onerror = () => {
+            loaded++;
+            if (loaded === totalFrames) resolve();
+          };
+
+          images.push(img);
+        }
+      });
+    };
+
+    /** -------------------------
+     * Canvas Rendering
+     --------------------------*/
+    const resizeCanvas = () => {
+      if (!canvas) return;
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      render();
+    };
 
     const render = () => {
       const img = images[imgSeq.frame];
-      if (!img || !img.complete) return;
-      const canvas = canvasRef.current;
-      const context = contextRef.current;
-      if (!canvas || !context) return;
+      if (!img || !ctx) return;
 
-      const canvasWidth = canvas.width;
-      const canvasHeight = canvas.height;
-      const imgWidth = img.naturalWidth || img.width;
-      const imgHeight = img.naturalHeight || img.height;
-      if (imgWidth === 0 || imgHeight === 0) return;
+      const cw = canvas!.width;
+      const ch = canvas!.height;
+      const iw = img.naturalWidth;
+      const ih = img.naturalHeight;
 
-      const scale = Math.max(canvasWidth / imgWidth, canvasHeight / imgHeight);
-      const x = canvasWidth / 2 - (imgWidth / 2) * scale;
-      const y = canvasHeight / 2 - (imgHeight / 2) * scale;
+      const scale = Math.max(cw / iw, ch / ih);
+      const x = cw / 2 - (iw / 2) * scale;
+      const y = ch / 2 - (ih / 2) * scale;
 
-      context.clearRect(0, 0, canvasWidth, canvasHeight);
-      context.drawImage(
-        img,
-        0,
-        0,
-        imgWidth,
-        imgHeight,
-        x,
-        y,
-        imgWidth * scale,
-        imgHeight * scale
-      );
+      ctx.clearRect(0, 0, cw, ch);
+      ctx.drawImage(img, 0, 0, iw, ih, x, y, iw * scale, ih * scale);
     };
 
-    const handleResize = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
+    /** -------------------------
+     * Start Process
+     --------------------------*/
+    preloadImages().then(() => {
+      setIsLoading(false); // Hide loader
 
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
+      resizeCanvas();
       render();
-    };
 
-    // Wait for all images to load, then setup canvas and animation
-    loadImages().then(() => {
-      handleResize();
-      render();
+      /** Kill previous triggers to avoid breakage */
+      ScrollTrigger.getAll().forEach((t) => t.kill());
 
       gsap.to(imgSeq, {
         frame: totalFrames - 1,
@@ -116,13 +112,20 @@ const HomeBanner = () => {
           end: `+=${isMobile ? 1500 : 3500}`,
           scrub: 1,
           pin: true,
+          invalidateOnRefresh: true,
         },
       });
 
       ScrollTrigger.refresh();
     });
 
-    return () => window.removeEventListener("resize", checkScreen);
+    window.addEventListener("resize", resizeCanvas);
+
+    return () => {
+      window.removeEventListener("resize", checkScreen);
+      window.removeEventListener("resize", resizeCanvas);
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
   }, []);
 
   return (
@@ -130,6 +133,15 @@ const HomeBanner = () => {
       ref={sectionRef}
       className="w-full h-screen relative overflow-hidden"
     >
+      {/* FULL PAGE LOADER */}
+      {isLoading && (
+        <div className="fixed inset-0 bg-black flex items-center justify-center z-[9999]">
+          <div className="animate-pulse text-white text-xl">
+            Loading experience...
+          </div>
+        </div>
+      )}
+
       <div className="w-full h-screen flex items-center justify-center overflow-hidden">
         <canvas
           ref={canvasRef}
@@ -139,11 +151,11 @@ const HomeBanner = () => {
         />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-10 h-2/3 translate-y-1/3 mix-blend-difference text-white">
-          <p className="text-[30px] md:text-[60px] lg:text-[75px] tracking-[-2.6px] lg:tracking-[-3.6px] text-center font-[400] lg:font-normal leading-[40px] md:leading-[70px] lg:leading-[70px] mb-2">
+          <p className="text-[30px] md:text-[60px] lg:text-[75px] tracking-[-2.6px] lg:tracking-[-3.6px] text-center font-[400] leading-[40px] md:leading-[70px]">
             A Web Branding House
           </p>
 
-          <p className="max-w-3xl font-light lg:text-[18px] leading-[23.94px] text-center mb-3">
+          <p className="max-w-3xl font-light lg:text-[18px] leading-6 text-center mb-3">
             At The Internet Company, we craft immersive 3D CGI websites,
             striking brand identities, and digital experiences that redefine how
             audiences interact with brands online.
@@ -154,101 +166,39 @@ const HomeBanner = () => {
             className="bg-white text-black px-5 py-3 rounded-[15.32px] flex items-center"
           >
             Book a Call
-            <MoveRight style={{ clipPath: "inset(0px 0 0px 10px)" }} />
+            <MoveRight />
           </Link>
         </div>
 
-        {/* Keep Scrolling Text */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-white text-sm md:text-base font-light tracking-wider ">
-          <div className="flex flex-row gap-2 sm:gap-3 md:gap-4 items-center justify-center px-3 sm:px-4 py-2 sm:py-2.5 md:py-3">
-            {/* Animated Dot */}
-            <div className="flex items-center justify-center">
-              <div className="dot-animation bg-black/50" />
-            </div>
-
-            {/* Static Text */}
-            <span className="text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-black/50 whitespace-nowrap leading-none">
-              Keep scrolling
-            </span>
+        {/* Keep Scrolling */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white">
+          <div className="flex items-center gap-2">
+            <div className="dot-animation bg-black/50" />
+            <span className="text-black/50">Keep scrolling</span>
           </div>
         </div>
       </div>
+
       <style jsx>{`
         .dot-animation {
-          width: 6px;
-          height: 6px;
+          width: 10px;
+          height: 10px;
           border-radius: 50%;
-          animation: pulseCircle 1.5s infinite ease-in-out;
-          flex-shrink: 0;
-        }
-
-        @media (min-width: 640px) {
-          .dot-animation {
-            width: 8px;
-            height: 8px;
-          }
-        }
-
-        @media (min-width: 768px) {
-          .dot-animation {
-            width: 10px;
-            height: 10px;
-          }
-        }
-
-        @media (min-width: 1024px) {
-          .dot-animation {
-            width: 12px;
-            height: 12px;
-          }
+          animation: pulseCircle 1.4s infinite ease-in-out;
         }
 
         @keyframes pulseCircle {
           0% {
             opacity: 0.3;
-            transform: scale(0.8) translateX(0);
+            transform: scale(0.8);
           }
           50% {
             opacity: 1;
-            transform: scale(1.2) translateX(2px);
+            transform: scale(1.2);
           }
           100% {
             opacity: 0.3;
-            transform: scale(0.8) translateX(0);
-          }
-        }
-
-        @media (min-width: 640px) {
-          @keyframes pulseCircle {
-            0% {
-              opacity: 0.3;
-              transform: scale(0.8) translateX(0);
-            }
-            50% {
-              opacity: 1;
-              transform: scale(1.2) translateX(3px);
-            }
-            100% {
-              opacity: 0.3;
-              transform: scale(0.8) translateX(0);
-            }
-          }
-        }
-
-        @media (min-width: 768px) {
-          @keyframes pulseCircle {
-            0% {
-              opacity: 0.3;
-              transform: scale(0.8) translateX(0);
-            }
-            50% {
-              opacity: 1;
-              transform: scale(1.2) translateX(4px);
-            }
-            100% {
-              opacity: 0.3;
-              transform: scale(0.8) translateX(0);
-            }
+            transform: scale(0.8);
           }
         }
       `}</style>

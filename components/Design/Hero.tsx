@@ -81,7 +81,7 @@ const Hero = () => {
         }}
       >
         <div className="py-15 px-8 md:px-16 lg:px-14 max-w-4xl text-white">
-          <h1 className="font-medium tracking-tighter text-[70px] md:text-[90px] leading-[1.1] mb-4">
+          <h1 className="font-normal tracking-tighter text-[70px] md:text-[90px] leading-[1.1] mb-4">
             Design House
           </h1>
           <p className="text-lg md:text-xl font-light max-w-2xl">
@@ -111,7 +111,7 @@ const Hero = () => {
 
         {/* Top-right paragraph */}
         <div className="absolute top-15 right-15 max-w-xl tracking-tighter text-left text-black z-10 pl-4">
-          <p ref={topTextRef} className="text-lg md:text-xl font-medium">
+          <p ref={topTextRef} className="text-lg md:text-xl font-normal">
             Eye-catching visuals for ads, websites, and product mockups. Artists
             use 3D tools to craft unique, collectible digital art. Visualize
             spaces before they're built. 3D environments for immersive shopping
@@ -121,7 +121,7 @@ const Hero = () => {
 
         {/* Bottom-left paragraph */}
         <div className="absolute bottom-15 left-15 max-w-xl tracking-tighter text-left text-black z-10 pr-4">
-          <p ref={bottomTextRef} className="text-lg md:text-xl font-medium">
+          <p ref={bottomTextRef} className="text-lg md:text-xl font-normal">
             Every website we create is designed with international UI/UX
             standards so that your brand looks credible across any audience,
             anywhere in the world.
