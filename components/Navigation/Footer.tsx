@@ -18,7 +18,7 @@ const content = [
   {
     img: "https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/11692479-2.png?updatedAt=1759840785454",
     name: "We're always looking for new collaborations.",
-    link: "#",
+    link: "/contact",
     button: "Contact us",
   },
   {
