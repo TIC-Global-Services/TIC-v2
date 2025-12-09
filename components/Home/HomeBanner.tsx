@@ -17,7 +17,8 @@ const HomeBanner = () => {
   const currentFrame = (i: number) =>
     `/door/${(i + 1).toString().padStart(5, "0")}.avif`;
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
+  const [isLoaderDone, setIsLoaderDone] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const HomeBanner = () => {
     contextRef.current = ctx;
 
     /** -------------------------
-     * Full Page LOADER
+     * Percentage Loader
      --------------------------*/
     const preloadImages = (): Promise<void> => {
       return new Promise((resolve) => {
@@ -47,17 +48,18 @@ const HomeBanner = () => {
           const img = new Image();
           img.src = currentFrame(i);
 
-          img.onload = () => {
-            loaded++;
-            if (loaded === totalFrames) resolve();
-          };
-
-          img.onerror = () => {
-            loaded++;
-            if (loaded === totalFrames) resolve();
-          };
+          img.onload = handleLoaded;
+          img.onerror = handleLoaded;
 
           images.push(img);
+        }
+
+        function handleLoaded() {
+          loaded++;
+          const percent = Math.round((loaded / totalFrames) * 100);
+          setProgress(percent);
+
+          if (loaded === totalFrames) resolve();
         }
       });
     };
@@ -90,15 +92,14 @@ const HomeBanner = () => {
     };
 
     /** -------------------------
-     * Start Process
+     * Start Preloading
      --------------------------*/
     preloadImages().then(() => {
-      setIsLoading(false); // Hide loader
+      setTimeout(() => setIsLoaderDone(true), 300); // fade-out delay
 
       resizeCanvas();
       render();
 
-      /** Kill previous triggers to avoid breakage */
       ScrollTrigger.getAll().forEach((t) => t.kill());
 
       gsap.to(imgSeq, {
@@ -133,14 +134,18 @@ const HomeBanner = () => {
       ref={sectionRef}
       className="w-full h-screen relative overflow-hidden"
     >
-      {/* FULL PAGE LOADER */}
-      {isLoading && (
-        <div className="fixed inset-0 bg-black flex items-center justify-center z-[9999]">
-          <div className="animate-pulse text-white text-xl">
-            Loading experience...
-          </div>
-        </div>
-      )}
+      {/* --------------------------------------------------
+          FULL PAGE LOADER (PERCENTAGE)
+       -------------------------------------------------- */}
+      <div
+        className={`fixed inset-0 bg-black flex items-center justify-center z-[9999] transition-opacity duration-700 ${
+          isLoaderDone ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        <p className="text-white text-6xl md:text-8xl font-light tracking-tight">
+          {progress}%
+        </p>
+      </div>
 
       <div className="w-full h-screen flex items-center justify-center overflow-hidden">
         <canvas
@@ -150,8 +155,9 @@ const HomeBanner = () => {
           className="absolute inset-0 w-full h-screen object-cover z-10"
         />
 
+        {/* TEXT BLOCK */}
         <div className="absolute inset-0 flex flex-col items-center justify-center z-20 px-10 h-2/3 translate-y-1/3 mix-blend-difference text-white">
-          <p className="text-[30px] md:text-[60px] lg:text-[75px] tracking-[-2.6px] lg:tracking-[-3.6px] text-center font-[400] leading-[40px] md:leading-[70px]">
+          <p className="text-[30px] md:text-[60px] lg:text-[75px] tracking-[-2.6px] lg:tracking-[-3.6px] text-center leading-[40px] md:leading-[70px] font-normal">
             A Web Branding House
           </p>
 
@@ -170,7 +176,7 @@ const HomeBanner = () => {
           </Link>
         </div>
 
-        {/* Keep Scrolling */}
+        {/* KEEP SCROLLING */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 text-white">
           <div className="flex items-center gap-2">
             <div className="dot-animation bg-black/50" />
@@ -186,7 +192,6 @@ const HomeBanner = () => {
           border-radius: 50%;
           animation: pulseCircle 1.4s infinite ease-in-out;
         }
-
         @keyframes pulseCircle {
           0% {
             opacity: 0.3;
