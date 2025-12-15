@@ -1,295 +1,258 @@
 "use client";
+
 import React, { useEffect, useRef, useState, useCallback } from "react";
-import { getCalApi } from "@calcom/embed-react";
 import Image from "next/image";
 import Link from "next/link";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { HiPlus } from "react-icons/hi2";
 import Container from "@/components/Reusbale/Container";
 import { usePathname } from "next/navigation";
+import { PopupModal } from "react-calendly";
 
-// Register GSAP plugin
-gsap.registerPlugin(ScrollTrigger);
 
 // Navigation items
 const navItems = [
   { name: "About", link: "/about" },
-  {
-    name: "Design House",
-    link: "/design-house",
-  },
-  {
-    name: "Client Portal",
-    link: "/client",
-  },
-  {
-    name: "Your Brand",
-    link: "/branding",
-  },
+  { name: "Design House", link: "/design-house" },
+  { name: "Client Portal", link: "/client" },
+  { name: "Your Brand", link: "/branding" },
   { name: "Archive", link: "/archive" },
   { name: "Contact", link: "/contact" },
   { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
 ];
 
-const FnavItems = [
-  { name: "Home", link: "/" },
-  { name: "About", link: "/about" },
-  {
-    name: "Design House",
-    link: "/design-house",
-  },
-  {
-    name: "Client Portal",
-    link: "/client",
-  },
-  {
-    name: "Your Brand",
-    link: "/branding",
-  },
-  { name: "Archive", link: "/archive" },
-  { name: "Contact", link: "/contact" },
-  // { name: "Contact", link: "https://www.theinternetcompany.one/contact" },
-  { name: "Abu Dhabi", link: "https://ticbyakwad.com/" },
-];
+const FnavItems = [{ name: "Home", link: "/" }, ...navItems];
+
 const Navbar = () => {
-  // References for DOM elements
-  const navbarRef = useRef(null);
-  const menuButtonRef = useRef(null);
-  const plusIconRef = useRef(null);
-  const overlayRef = useRef(null);
-  const menuLinksRef = useRef(null);
-  const socialLinksRef = useRef(null);
-  const overlayLogoRef = useRef(null);
+  const navbarRef = useRef<HTMLElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const plusIconRef = useRef<HTMLDivElement | null>(null);
+  const overlayRef = useRef<HTMLDivElement | null>(null);
+  const menuLinksRef = useRef<HTMLDivElement | null>(null);
+  const socialLinksRef = useRef<HTMLDivElement | null>(null);
+  const overlayLogoRef = useRef<HTMLDivElement | null>(null);
 
-  // State management
+  const pathname = usePathname();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 
-  const pathname = usePathname();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [bgStyle, setBgStyle] = useState({ left: 0, width: 100, opacity: 0 });
-  const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [bgStyle, setBgStyle] = useState({ left: 0, width: 100, opacity: 0 });
+
+  const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+  const calendlyRootRef = useRef<HTMLElement | null>(null);
 
   const isWhiteBg =
-    pathname === "/contact" ||
-    pathname === "/archive" ||
+    pathname === "/" ||
     pathname === "/about" ||
-    pathname === "/";
+    pathname === "/contact" ||
+    pathname === "/archive";
 
-  const isClient = pathname === "/client" || pathname === '/design-house' || pathname === "/branding" ;
+  const isClient =
+    pathname === "/client" ||
+    pathname === "/design-house" ||
+    pathname === "/branding";
 
+  const lastScrollY = useRef(0);
+const ticking = useRef(false);
+
+
+  /* -------------------------------
+     INITIAL STATES (RUN ONCE)
+  -------------------------------- */
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "discovery-call" });
-      cal("ui", { hideEventTypeDetails: false, layout: "column_view" });
-    })();
-  }, []);
+    calendlyRootRef.current = document.body;
 
-  // Setup initial element states
-  const setupInitialStates = useCallback(() => {
-    if (!menuButtonRef.current || !overlayRef.current) return;
-
-    // Hide menu button initially
-    gsap.set(menuButtonRef.current, {
-      opacity: 0,
-      scale: 0.8,
-      y: -20,
-    });
-
-    // Hide overlay initially
-    gsap.set(overlayRef.current, {
-      clipPath: "circle(0% at 95% 5%)",
-      visibility: "hidden",
-    });
-
-    // Hide overlay content initially
-    const overlayElements = [
-      menuLinksRef.current,
-      socialLinksRef.current,
-      overlayLogoRef.current,
-    ].filter(Boolean);
-    if (overlayElements.length > 0) {
-      gsap.set(overlayElements, {
+    if (menuButtonRef.current) {
+      gsap.set(menuButtonRef.current, {
         opacity: 0,
-        y: 50,
+        scale: 0.8,
+        y: -20,
       });
     }
+
+    if (overlayRef.current) {
+      gsap.set(overlayRef.current, {
+        clipPath: "circle(0% at 95% 5%)",
+        visibility: "hidden",
+        opacity: 0,
+      });
+    }
+
+    gsap.set(
+      [menuLinksRef.current, socialLinksRef.current, overlayLogoRef.current],
+      { opacity: 0, y: 50 }
+    );
   }, []);
 
-  // Setup scroll-based animations
-  const setupScrollAnimations = useCallback(() => {
-    if (!navbarRef.current || !menuButtonRef.current) return;
+  /* -------------------------------
+     NAVBAR SCROLL ANIMATION
+     (LISTENS TO HERO PIN)
+  -------------------------------- */
+  useEffect(() => {
+  if (!navbarRef.current || !menuButtonRef.current) return;
 
-    return ScrollTrigger.create({
-      trigger: document.body,
-      start: "50px top",
-      end: "20px top",
-      scrub: 0.5,
-      onUpdate: (self) => {
-        const progress = self.progress;
+  const navbar = navbarRef.current;
+  const menuBtn = menuButtonRef.current;
 
-        // Navbar fade out smoothly
-        const navbarOpacity = Math.max(0, 1 - progress * 2);
-        const navbarY = progress * -80;
+  // initial state
+  navbar.style.transform = "translateY(0)";
+  navbar.style.opacity = "1";
 
-        // Menu button fade in with proper timing
-        const buttonOpacity = Math.min(1, Math.max(0, (progress - 0.3) * 2));
-        const buttonScale = 0.8 + buttonOpacity * 0.2;
-        const buttonY = -20 + buttonOpacity * 20;
+  menuBtn.style.opacity = "0";
+  menuBtn.style.transform = "translateY(-20px) scale(0.8)";
 
-        // Animate navbar
-        gsap.set(navbarRef.current, {
-          y: navbarY,
-          opacity: navbarOpacity,
-        });
+  const onScroll = () => {
+    if (ticking.current) return;
 
-        // Animate menu button (only when navbar is mostly hidden)
-        gsap.set(menuButtonRef.current, {
-          opacity: buttonOpacity,
-          scale: buttonScale,
-          y: buttonY,
-        });
-      },
+    ticking.current = true;
+
+    requestAnimationFrame(() => {
+      const currentY = window.scrollY;
+
+      // SCROLL DOWN → hide navbar, show menu
+      if (currentY > 80) {
+        navbar.style.transform = "translateY(-80px)";
+        navbar.style.opacity = "0";
+
+        menuBtn.style.opacity = "1";
+        menuBtn.style.transform = "translateY(0) scale(1)";
+      } 
+      // TOP → show navbar, hide menu
+      else {
+        navbar.style.transform = "translateY(0)";
+        navbar.style.opacity = "1";
+
+        menuBtn.style.opacity = "0";
+        menuBtn.style.transform = "translateY(-20px) scale(0.8)";
+      }
+
+      lastScrollY.current = currentY;
+      ticking.current = false;
     });
-  }, []);
+  };
 
-  // Open menu animation
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  return () => {
+    window.removeEventListener("scroll", onScroll);
+  };
+}, []);
+
+
+  /* -------------------------------
+     ACTIVE / HOVER NAV BG
+  -------------------------------- */
+  useEffect(() => {
+    const index = navItems.findIndex((i) => i.link === pathname);
+    setActiveIndex(index === -1 ? null : index);
+  }, [pathname]);
+
+  useEffect(() => {
+    const index = hoveredIndex ?? activeIndex;
+    if (index === null) {
+      setBgStyle((p) => ({ ...p, opacity: 0 }));
+      return;
+    }
+
+    const el = navRefs.current[index];
+    if (!el) return;
+
+    setBgStyle({
+      left: el.offsetLeft,
+      width: el.offsetWidth,
+      opacity: 1,
+    });
+  }, [hoveredIndex, activeIndex]);
+
+  /* -------------------------------
+     MENU OPEN / CLOSE
+  -------------------------------- */
   const openMenu = useCallback(() => {
     if (!overlayRef.current || !plusIconRef.current) return;
 
     gsap.set(overlayRef.current, { visibility: "visible", opacity: 1 });
 
-    // Animate plus icon to X
     gsap.to(plusIconRef.current, {
       rotation: 45,
       scale: 1.1,
       duration: 0.3,
-      ease: "power2.out",
     });
 
-    // Expand overlay
     gsap.to(overlayRef.current, {
       clipPath: "circle(150% at 95% 5%)",
       duration: 0.6,
       ease: "power3.inOut",
     });
 
-    // Animate overlay content with stagger
-    const tl = gsap.timeline({ delay: 0.2 });
-
-    if (overlayLogoRef.current) {
-      tl.to(overlayLogoRef.current, {
+    gsap.to(
+      [overlayLogoRef.current, menuLinksRef.current, socialLinksRef.current],
+      {
         opacity: 1,
         y: 0,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-    }
-
-    if (menuLinksRef.current) {
-      tl.to(
-        menuLinksRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power2.out",
-        },
-        "-=0.3"
-      );
-    }
-
-    if (socialLinksRef.current) {
-      tl.to(
-        socialLinksRef.current,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.4,
-          ease: "power2.out",
-        },
-        "-=0.3"
-      );
-    }
+        stagger: 0.08,
+        delay: 0.2,
+      }
+    );
   }, []);
 
-  // Close menu animation
   const closeMenu = useCallback(() => {
-    if (!plusIconRef.current || !overlayRef.current) return;
+    if (!overlayRef.current || !plusIconRef.current) return;
 
-    // Reset plus icon based on hover state
-    const targetRotation = isHovering ? 22.5 : 0;
     gsap.to(plusIconRef.current, {
-      rotation: targetRotation,
+      rotation: isHovering ? 22.5 : 0,
       scale: 1,
       duration: 0.3,
-      ease: "power2.out",
     });
 
-    // Hide overlay content
-    const overlayElements = [
-      overlayLogoRef.current,
-      menuLinksRef.current,
-      socialLinksRef.current,
-    ].filter(Boolean);
-    if (overlayElements.length > 0) {
-      gsap.to(overlayElements, {
+    gsap.to(
+      [overlayLogoRef.current, menuLinksRef.current, socialLinksRef.current],
+      {
         opacity: 0,
         y: 30,
-        duration: 0.3,
-        ease: "power2.inOut",
         stagger: 0.05,
-      });
-    }
-  
+      }
+    );
 
-    // Collapse overlay
     gsap.to(overlayRef.current, {
       clipPath: "circle(0% at 95% 5%)",
       duration: 0.4,
       delay: 0.1,
-      ease: "power3.inOut",
       onComplete: () => {
-        gsap.set(overlayRef.current, { visibility: "hidden", opacity: 0 });
+        gsap.set(overlayRef.current, {
+          visibility: "hidden",
+          opacity: 0,
+        });
       },
     });
   }, [isHovering]);
 
-  // Handle menu toggle
   const toggleMenu = useCallback(() => {
-    if (!isMenuOpen) {
-      openMenu();
-    } else {
-      closeMenu();
-    }
-    setIsMenuOpen((prev) => !prev);
-  }, [isMenuOpen, openMenu, closeMenu]);
+    setIsMenuOpen((p) => {
+      !p ? openMenu() : closeMenu();
+      return !p;
+    });
+  }, [openMenu, closeMenu]);
 
-  // Handle hover enter
-  const handleHoverEnter = useCallback(() => {
+  /* -------------------------------
+     HOVER EFFECT
+  -------------------------------- */
+  const handleHoverEnter = () => {
     setIsHovering(true);
     if (!isMenuOpen && plusIconRef.current) {
-      gsap.to(plusIconRef.current, {
-        rotation: 22.5,
-        duration: 0.25,
-        ease: "power2.out",
-      });
+      gsap.to(plusIconRef.current, { rotation: 22.5, duration: 0.25 });
     }
-  }, [isMenuOpen]);
+  };
 
-  // Handle hover leave
-  const handleHoverLeave = useCallback(() => {
+  const handleHoverLeave = () => {
     setIsHovering(false);
     if (!isMenuOpen && plusIconRef.current) {
-      gsap.to(plusIconRef.current, {
-        rotation: 0,
-        duration: 0.25,
-        ease: "power2.out",
-      });
+      gsap.to(plusIconRef.current, { rotation: 0, duration: 0.25 });
     }
-  }, [isMenuOpen]);
+  };
 
   // Close menu when link is clicked
   const handleLinkClick = useCallback(() => {
@@ -297,29 +260,6 @@ const Navbar = () => {
       toggleMenu();
     }
   }, [isMenuOpen, toggleMenu]);
-
-  // Setup animations on mount
-  useEffect(() => {
-    setupInitialStates();
-    const scrollTrigger = setupScrollAnimations();
-
-    // Cleanup function
-    return () => {
-      if (scrollTrigger) scrollTrigger.kill();
-      // ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, [setupInitialStates, setupScrollAnimations]);
-  useEffect(() => {
-    ScrollTrigger.getAll().forEach((t) => t.kill());
-
-    setupInitialStates();
-    const trigger = setupScrollAnimations();
-    requestAnimationFrame(() => ScrollTrigger.refresh());
-
-    return () => {
-      trigger?.kill();
-    };
-  }, [pathname]);
 
   // useEffect(() => {
 
@@ -464,13 +404,22 @@ const Navbar = () => {
 
           {/* CTA Button - Responsive sizing */}
           <button
-            data-cal-namespace="discovery-call"
-            data-cal-link="theinternetcompany/discovery-call"
-            data-cal-config='{"layout":"column_view"}'
-            className="text-sm cursor-pointer sm:text-base lg:text-[16px] p-(14px,20px,14px,20px) sm:px-4  rounded-[12px] font-light transition-all duration-300 shadow-lg bg-black text-white px-5 py-2  hover:bg-black/80"
+            onClick={() => setIsCalendlyOpen(true)}
+            className="text-sm cursor-pointer sm:text-base lg:text-[16px] 
+    rounded-[12px] font-light transition-all duration-300 shadow-lg 
+    bg-black text-white px-5 py-2 hover:bg-black/80"
           >
             Let&apos;s talk
           </button>
+
+          {calendlyRootRef.current && (
+            <PopupModal
+              url="https://calendly.com/theinternetcompany01/30min"
+              open={isCalendlyOpen}
+              onModalClose={() => setIsCalendlyOpen(false)}
+              rootElement={calendlyRootRef.current}
+            />
+          )}
         </Container>
       </nav>
 

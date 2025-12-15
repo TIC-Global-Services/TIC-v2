@@ -3,9 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
 import { MoveRight } from "lucide-react";
-import { getCalApi } from "@calcom/embed-react";
+import { PopupModal } from "react-calendly";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -22,11 +21,11 @@ const HomeBanner = () => {
   const [isLoaderDone, setIsLoaderDone] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+  const calendlyRootRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    (async function () {
-      const cal = await getCalApi({ namespace: "discovery-call" });
-      cal("ui", { hideEventTypeDetails: false, layout: "column_view" });
-    })();
+    calendlyRootRef.current = document.body;
   }, []);
 
   useEffect(() => {
@@ -142,6 +141,7 @@ const HomeBanner = () => {
   return (
     <section
       ref={sectionRef}
+      data-scroll-pin="main"
       className="w-full h-screen relative overflow-hidden"
     >
       {/* --------------------------------------------------
@@ -178,14 +178,21 @@ const HomeBanner = () => {
           </p>
 
           <button
-            data-cal-namespace="discovery-call"
-            data-cal-link="theinternetcompany/discovery-call"
-            data-cal-config='{"layout":"column_view"}'
-            className="bg-white text-black px-5 py-3 rounded-[15.32px] flex items-center"
+            onClick={() => setIsCalendlyOpen(true)}
+            className="bg-white cursor-pointer text-black px-5 py-3 rounded-[15.32px] flex items-center"
           >
             Book a Call
             <MoveRight />
           </button>
+
+          {calendlyRootRef.current && (
+            <PopupModal
+              url="https://calendly.com/theinternetcompany01/30min"
+              open={isCalendlyOpen}
+              onModalClose={() => setIsCalendlyOpen(false)}
+              rootElement={calendlyRootRef.current}
+            />
+          )}
         </div>
 
         {/* KEEP SCROLLING */}

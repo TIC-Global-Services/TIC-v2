@@ -101,7 +101,7 @@ const Horizontal: React.FC = () => {
   return (
     <div className="bg-[#f5f5f5]">
       {/* Horizontal scroll container */}
-      <div ref={containerRef} className="h-screen overflow-hidden relative">
+      <div data-scroll-pin="main" ref={containerRef} className="h-screen overflow-hidden relative">
         {isHovering && (
           <div
             className="fixed pointer-events-none z-50 transition-opacity duration-200 flex items-center gap-3"
