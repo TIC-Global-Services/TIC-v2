@@ -7,6 +7,7 @@ import { HiPlus } from "react-icons/hi2";
 import Container from "@/components/Reusbale/Container";
 import { usePathname } from "next/navigation";
 import { PopupModal } from "react-calendly";
+import gsap from 'gsap'
 
 
 // Navigation items
