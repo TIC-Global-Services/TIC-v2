@@ -5,6 +5,7 @@ import { FaInstagram } from "react-icons/fa";
 import Image from "next/image";
 import { RiArrowRightLine } from "react-icons/ri";
 import { usePathname } from "next/navigation";
+import { link } from "fs";
 
 const socialLinks = [
   {
@@ -28,16 +29,19 @@ const content = [
     button: "Go to Insta",
   },
 ];
+
 const contactcontent = [
   {
     name: "Check out our latest work on instagram",
     button: "TIC.Global",
     color: "#4B4845",
+    link: "https://www.instagram.com/the.internetcompany/",
   },
   {
     name: "Join our team Send us your portfolio together with a brief introduction and we will get back to you as soon as possible.",
     button: "admin@theinternetcompany.one",
     color: "#FFFFFF",
+    link: "mailto:admin@theinternetcompany.one"
   },
 ];
 const Footer = () => {
@@ -155,7 +159,7 @@ const Footer = () => {
                         {/* Button at Bottom */}
                         <div className="flex justify-start">
                           <a
-                            // href={item.link}
+                            href={item.link}
                             className={`inline-flex items-center gap-2 px-5 sm:px-6 md:px-8 py-2 sm:py-2.5 md:py-3 bg-transparent border ${
                               index == 0
                                 ? "border-white text-white"

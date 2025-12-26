@@ -16,7 +16,7 @@ const SummrAndVesenex = () => {
         </div>
         <div>
           <Image
-            src="https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Design%20House/Group%204.png"
+            src="https://ik.imagekit.io/99y1fc9mh/TIC_Globe/images/Design%20House/Summr%20grp.jpg"
             alt=""
             width={1000}
             height={500}
